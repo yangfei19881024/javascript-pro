@@ -1,0 +1,6 @@
+#cnblogs_post_body h1{background-color: gray; padding-left: 5px; color: white; font-size: 20px; font-weight: bold;}
+.cnblogs_code{
+    background-color: #F8F8EE;
+    border: 1px dashed #CCCCCC;
+    padding: 5px 5px 5px 5px;
+}

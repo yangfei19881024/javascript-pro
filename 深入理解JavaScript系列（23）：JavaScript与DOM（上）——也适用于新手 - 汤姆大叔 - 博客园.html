@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/analytics.js"></script>
+<meta charset="utf-8">
+<title>深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/bundle-Minyx2_Lite.css">
+<link type="text/css" rel="stylesheet" href="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/101461.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/TomXu/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/TomXu/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/TomXu/wlwmanifest.xml">
+<script type="text/javascript" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/encoder.js"></script><script async="" type="text/javascript" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/gpt.js"></script><script src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'TomXu', cb_enable_mathjax=false;</script>
+<script src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/blog-common.js" type="text/javascript"></script>
+<script src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/bundle-Minyx2_Lite.js" language="javascript" type="text/javascript"></script>
+<script async="" type="text/javascript" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/pubads_impl_56.js"></script></head>
+<body>
+<a name="top"></a>
+
+
+<div id="container">
+    <a class="minyx" href="http://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            
+                
+Posts - 143, 
+Articles - 1, 
+Comments - 18868
+<!---->
+            
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="http://www.cnblogs.com/">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="http://www.cnblogs.com/TomXu/admin/EditPosts.aspx">Dashboard</a></li>
+        <li>
+            <a id="lnkLogin" href="http://passport.cnblogs.com/login.aspx?ReturnUrl=http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html">Login</a></li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="http://www.cnblogs.com/TomXu/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="http://space.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="http://www.cnblogs.com/TomXu/gallery.html">Gallery</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="http://www.cnblogs.com/TomXu/rss">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="http://www.cnblogs.com/TomXu/">汤姆大叔的博客</a>
+            <!-- 子标题 -->
+            <small>
+                </small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            
+
+<div class="post" id="post">
+    <a name="top"></a>
+    <h2><a id="cb_post_title_url" href="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园.html">深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手</a></h2>
+    <small>2012-02-16 08:56 by 汤姆大叔, <span id="post_view_count">14562</span> 阅读, <span id="post_comment_count">24</span> 评论, <a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#" onclick="AddToWz(2351331);return false;">收藏</a>,  <a href="http://i.cnblogs.com/EditPosts.aspx?postid=2351331" rel="nofollow">编辑</a></small>
+    <div class="entry">
+        <div id="cnblogs_post_body"><h1>文档对象模型Document Object Model</h1>
+<p>DOM（Document Object Model，文档对象模型）是一个通过和JavaScript进行内容交互的API。Javascript和DOM一般经常作为一个整体，因为Javascript通常都是用来进行DOM操作和交互的。</p>
+<p><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/2012021415450667.png" alt="" style="width: 545px;"></p>
+<p>主要内容来自：http://net.tutsplus.com/tutorials/javascript-ajax/javascript-and-the-dom-series-lesson-1/</p>
+<p>关于DOM，有些知识需要注意：<br>1. window对象作为全局对象，也就是说你可以通过window来访问全局对象。</p>
+<ol>
+<li>&nbsp;属性在对象下面以变量的形式存放，在页面上创建的所有全局对象都会变成window对象的属性。</li>
+<li>方法在对象下面以函数的形式存放，因为左右的函数都存放在window对象下面，所以他们也可以称为方法。</li>
+</ol>
+<p>2. DOM为web文档创建带有层级的结果，这些层级是通过node节点组成，这里有几种DOM node类型，最重要的是Element, Text, Document。</p>
+<ol>
+<li>&nbsp;Element节点在页面里展示的是一个元素，所以如果你有段落元素(&lt;p&gt;)，你可以通过这个DOM节点来访问。</li>
+<li>&nbsp;Text节点在页面里展示的所有文本相关的元素，所以如果你的段落有文本在里面的话，你可以直接通过DOM的Text节点来访问这个文本</li>
+<li>&nbsp;Document节点代表是整个文档，它是DOM的根节点。</li>
+</ol>
+<p>3. 每个引擎对DOM标准的实现有一些轻微的不同。例如，Firefox浏览器使用的Gecko引擎有着很好的实现（尽管没有完全遵守W3C规范），但IE浏览器使用的Trident引擎的实现却不完整而且还有bug，给开发人言带来了很多问题。</p>
+<p><span style="color: #ff6600;">如果你正在使用Firefox，我推荐你立即下载Firebug插件，对于你了解DOM结构非常有用。</span></p>
+<h1>Web上的JavaScript</h1>
+<h2><strong>Script元素</strong></h2>
+<p>当你在网站页面上使用JavaScript的时候，需要使用SCRIPT元素：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>    <span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"</span><span style="color: #0000ff;">&gt;</span>  <br>    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html </span><span style="color: #ff0000;">xmlns</span><span style="color: #0000ff;">="http://www.w3.org/1999/xhtml"</span><span style="color: #ff0000;"> lang</span><span style="color: #0000ff;">="en"</span><span style="color: #0000ff;">&gt;</span>  <br>        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>  <br>                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">http-equiv</span><span style="color: #0000ff;">="Content-Type"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="text/html; charset=UTF-8"</span> <span style="color: #0000ff;">/&gt;</span>  <br>                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>JavaScript!<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>  <br>        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>  <br>        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>        <br>            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="text/javascript"</span><span style="color: #0000ff;">&gt;</span><span style="background-color: #f5f5f5; color: #000000;">  <br>            </span><span style="background-color: #f5f5f5; color: #008000;">//</span><span style="background-color: #f5f5f5; color: #008000;"> &lt;![CDATA[  </span><span style="background-color: #f5f5f5; color: #008000;"><br></span><span style="background-color: #f5f5f5; color: #000000;">      <br>            </span><span style="background-color: #f5f5f5; color: #008000;">//</span><span style="background-color: #f5f5f5; color: #008000;"> ]]&gt;  </span><span style="background-color: #f5f5f5; color: #008000;"><br></span><span style="color: #0000ff;">            &lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>        <br>        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>  <br>    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span>  </pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>上述代码，严格来说SCRIPT的TYPE属性应该设置为application/javascript，但是由于IE不支持这个，所以平时我们不得不写成text/javascript或者直接去掉type。另外你也可以看到在SCRIPT元素里的注释行// &lt;![CDATA[ 是用来告诉支持XHTML的浏览器，这里面的代码是字符数据而不是XHTML标签，比如如果你在里面的数据使用了&lt;或&gt;，浏览器就不会再解析成XHTML标签了。</p>
+<h2><strong>Defer属性</strong></h2>
+<p>任何在SCRIPT元素里声明的代码在页面加载的时候都会运行，唯一一个例外是给SCRIPT元素加上一个defer属性。defer属性告诉浏览器加载完HTML文档以后再执行JS代码，但这个属性只能在IE下使用。</p>
+<h2><strong>连接外部脚本</strong></h2>
+<p>如果你想了解外部脚本，只需要简单地在SCRIPT上使用SRC属性就行了，使用单独的JS文件的好处是可以缓存，而且也不需要担心CDATA方面的问题：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="text/javascript"</span><span style="color: #ff0000;"> src</span><span style="color: #0000ff;">="my-script.js"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<h2><strong>JavaScript必备</strong></h2>
+<p>在我们继续DOM之前，我们来复习一下JavaScript的核心必备知识，如果你还不了解，也没关系，我们在这一章节将稍微花点时间来回顾一下。</p>
+<p>JavaScript有几种数据类型：Number, String, Boolean, Object, Undefined and Null。</p>
+<p>单行注释使用双斜杠//，双斜杠后面的所有文字都会被注释掉，多行注意使用/*和*/括住。</p>
+<h3><strong>Number</strong></h3>
+<p>在JavaScript里所有的Number都是浮点型的，当声明一个数字变量的时候，记得不要使用任何引号。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> 注：使用var类声明变量</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> leftSide = 100;  <br><span style="color: #0000ff;">var</span> topSide = 50;  <br><span style="color: #0000ff;">var</span> areaOfRectangle = leftSide * topSide; <span style="color: #008000;">//</span><span style="color: #008000;"> = 5000  </span></pre>
+</div>
+<h3><strong>String</strong></h3>
+<p>JavaScript里声明字符串特别简单，和其它语言一样，在JS里使用单引号或双引号都可以。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> firstPart = 'Hello';  <br><span style="color: #0000ff;">var</span> secondPart = 'World!';  <br><span style="color: #0000ff;">var</span> allOfIt = firstPart + ' ' + secondPart; <span style="color: #008000;">//</span><span style="color: #008000;"> Hello World!  </span><span style="color: #008000;"><br>//</span><span style="color: #008000;"> +符合是字符连接符。也用于数字相加</span></pre>
+</div>
+<h3><strong>Boolean</strong></h3>
+<p>布尔类型用于条件判断，布尔类型是只有2个值：true和false。任何使用逻辑操作符的比较都会返回布尔值。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>5 === (3 + 2); <span style="color: #008000;">//</span><span style="color: #008000;"> = true  </span><span style="color: #008000;"><br>//</span><span style="color: #008000;"> 你也可以将布尔值赋给一个变量</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> veryTired = <span style="color: #0000ff;">true</span>;<br><span style="color: #008000;">//</span><span style="color: #008000;"> 这样使用</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">if</span> (veryTired) {<br>    <span style="color: #008000;">//</span><span style="color: #008000;"> 执行代码 </span><span style="color: #008000;"><br></span>}   </pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>===也是比较操作符，不仅比较数值，还比较类型。</p>
+<h3><strong>Function</strong></h3>
+<p>函数是特殊的对象。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> 使用function操作符来声明新函数  </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">function</span> myFunctionName(arg1, arg2) {<br>    <span style="color: #008000;">//</span><span style="color: #008000;"> 函数代码</span><span style="color: #008000;"><br></span>}<br><br><span style="color: #008000;">//</span><span style="color: #008000;"> 你也可以声明匿名函数 </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">function</span> (arg1, arg2) {<br>    <span style="color: #008000;">//</span><span style="color: #008000;"> Function code goes here.  </span><span style="color: #008000;"><br></span>}<br><br><span style="color: #008000;">//</span><span style="color: #008000;"> 运行函数很简单，直接在函数名称后面加上小括号就可以了</span><span style="color: #008000;"><br>//</span><span style="color: #008000;"> 或者也可以带上参数</span><span style="color: #008000;"><br></span>myFunctionName(); <span style="color: #008000;">//</span><span style="color: #008000;"> 无参</span><span style="color: #008000;"><br></span>myFunctionName('foo', 'bar'); <span style="color: #008000;">//</span><span style="color: #008000;"> 有参数</span><span style="color: #008000;"><br></span><br><span style="color: #008000;">//</span><span style="color: #008000;"> 也可以使用自调用  </span><span style="color: #008000;"><br></span><br>(<span style="color: #0000ff;">function</span> () {<br>    <span style="color: #008000;">//</span><span style="color: #008000;"> 这里自调用函数</span><span style="color: #008000;"><br></span>})();</pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h3><strong>Array</strong></h3>
+<p>数组也是特殊的对象，它包含了一批值（或对象），访问这些数据的话需要使用数字索引：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> 2种方式声明数组</span><span style="color: #008000;"><br></span><br><span style="color: #008000;">//</span><span style="color: #008000;"> 字面量:  </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> fruit = ['apple', 'lemon', 'banana'];<br><br><span style="color: #008000;">//</span><span style="color: #008000;"> Array构造函数:  </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> fruit = <span style="color: #0000ff;">new</span> Array('apple', 'lemon', 'banana');<br><br>fruit[0]; <span style="color: #008000;">//</span><span style="color: #008000;"> 访问第1个项(apple)  </span><span style="color: #008000;"><br></span>fruit[1]; <span style="color: #008000;">//</span><span style="color: #008000;"> 访问第2个项(lemon)  </span><span style="color: #008000;"><br></span>fruit[2]; <span style="color: #008000;">//</span><span style="color: #008000;"> 访问第3个项(banana) </span></pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h3><strong>Object</strong></h3>
+<p>一个对象是一个key-value的集合，和数组相似，唯一的不同是你可以为每个数据定义一个名称。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> 2种类型定义Object对象</span><span style="color: #008000;"><br></span><br><span style="color: #008000;">//</span><span style="color: #008000;"> 字面量（大括号）</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> profile = {<br>    name: 'Bob',<br>    age: 99,<br>    job: 'Freelance Hitman'<br>};<br><br><span style="color: #008000;">//</span><span style="color: #008000;"> 使用Object构造函数</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> profile = <span style="color: #0000ff;">new</span> Object();<br>profile.name = 'Bob';<br>profile.age = 99;<br>profile.job = 'Freelance Hitman';  </pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h3><strong>IF/Else语句</strong></h3>
+<p>JS里使用最多的语句莫过于条件语句了：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">var</span> legalDrinkingAge = 21;  <br><span style="color: #0000ff;">var</span> yourAge = 29;  <br>  <br><span style="color: #0000ff;">if</span> ( yourAge &gt;= legalDrinkingAge ) {   <br>    alert('You can drink.');  <br>} <span style="color: #0000ff;">else</span> {  <br>    alert('Sorry, you cannot drink.');  </pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h3><strong>JavaScript操作符</strong></h3>
+<p>建议你访问<a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Guide/Operators" target="_blank">这个页面</a>来查看所有的JS操作符，这里我仅仅给出一些例子：&nbsp;&nbsp;&nbsp;</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> 加减乘除</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> someMaths = 2 + 3 + 4 - 10 * 100 / 2;  <br>      <br><span style="color: #008000;">//</span><span style="color: #008000;"> 等于  </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">if</span> ( 2 == (5 - 3 ) { <span style="color: #008000;">/*</span><span style="color: #008000;"> 代码 </span><span style="color: #008000;">*/</span> } <span style="color: #008000;">//</span><span style="color: #008000;"> == 比较是否相等</span><span style="color: #008000;"><br></span>      <br><span style="color: #008000;">//</span><span style="color: #008000;"> 不等于 </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">if</span> ( 2 != (5 - 3 ) { <span style="color: #008000;">/*</span><span style="color: #008000;"> 代码 </span><span style="color: #008000;">*/</span> }   <br>      <br><span style="color: #008000;">//</span><span style="color: #008000;"> 严格等于（推荐） </span><span style="color: #008000;"><br></span>2 === 2 <span style="color: #008000;">//</span><span style="color: #008000;"> 代替 2 == 2  </span><span style="color: #008000;"><br></span>2 !== 3 <span style="color: #008000;">//</span><span style="color: #008000;"> 代替 2 != 3  </span><span style="color: #008000;"><br></span>      <br><span style="color: #008000;">//</span><span style="color: #008000;"> 赋值:  </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> numberOfFruit = 9;  <br>numberOfFruit -= 2; <span style="color: #008000;">//</span><span style="color: #008000;"> 等价于 "numberOfFruit = numberOfFruit - 2"  </span><span style="color: #008000;"><br></span>numberOfFruit += 2; <span style="color: #008000;">//</span><span style="color: #008000;"> 等价于 "numberOfFruit = numberOfFruit + 2"   </span></pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h3><strong>Loop循环</strong></h3>
+<p>Loop循环在是遍历数组或者对象的所有成员的时候非常方便，JavaScript里使用最多的是FOR和WHILE语句。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">var</span> envatoTutSites = ['NETTUTS', 'PSDTUTS', 'AUDIOTUTS', 'AETUTS', 'VECTORTUTS'];<br><br><span style="color: #008000;">//</span><span style="color: #008000;"> WHILE循环</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> counter = 0;<br><span style="color: #0000ff;">var</span> lengthOfArray = envatoTutSites.length;<br><span style="color: #0000ff;">while</span> (counter &lt; lengthOfArray) {<br>    alert(envatoTutSites[counter]);<br>    counter++; <span style="color: #008000;">//</span><span style="color: #008000;"> 等价于counter += 1;  </span><span style="color: #008000;"><br></span>}<br><br><span style="color: #008000;">//</span><span style="color: #008000;"> FOR循环</span><span style="color: #008000;"><br>//</span><span style="color: #008000;"> i只是用于迭代，可以任意取名 </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">var</span> i = 0, length = envatoTutSites.length; i &lt; length; i++) {<br>    alert(envatoTutSites[i]);<br>}  </pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h1>DOM正文</h1>
+<h2><strong>访问DOM节点</strong></h2>
+<p>我们来个例子，一个HTML里包含一段文本和一个无序的列表。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"</span><span style="color: #0000ff;">&gt;</span>  <br><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html </span><span style="color: #ff0000;">xmlns</span><span style="color: #0000ff;">="http://www.w3.org/1999/xhtml"</span><span style="color: #ff0000;"> lang</span><span style="color: #0000ff;">="en"</span><span style="color: #0000ff;">&gt;</span>  <br>    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>  <br>            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">http-equiv</span><span style="color: #0000ff;">="Content-Type"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="text/html; charset=UTF-8"</span> <span style="color: #0000ff;">/&gt;</span>  <br>            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>JavaScript!<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>  <br>    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>  <br>    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>  <br>  <br>        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">p </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="intro"</span><span style="color: #0000ff;">&gt;</span>My first paragraph...<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">p</span><span style="color: #0000ff;">&gt;</span>  <br>  <br>        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span>  <br>            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>List item 1<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>  <br>            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>List item 1<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>  <br>            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>List item 1<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>  <br>            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>List item 1<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>  <br>            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>List item 1<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>  <br>        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span>  <br>  <br>        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="text/javascript"</span><span style="color: #0000ff;">&gt;</span><span style="background-color: #f5f5f5; color: #000000;">  <br>        </span><span style="background-color: #f5f5f5; color: #008000;">//</span><span style="background-color: #f5f5f5; color: #008000;"> &lt;![CDATA[  </span><span style="background-color: #f5f5f5; color: #008000;"><br></span><span style="background-color: #f5f5f5; color: #000000;">  <br>        </span><span style="background-color: #f5f5f5; color: #008000;">//</span><span style="background-color: #f5f5f5; color: #008000;"> ]]&gt;  </span><span style="background-color: #f5f5f5; color: #008000;"><br></span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>  <br>  <br>    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>  <br><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span> </pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>上面例子里，我们使用getElementById DOM方法来访问p段落，在SCRIPT里添加如下代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> introParagraph = document.getElementById('intro');  <br><span style="color: #008000;">//</span><span style="color: #008000;"> 现在有了该DOM节点，这个DOM节点展示的是该信息段落</span></pre>
+</div>
+<p>变量introParagraph现在已经引用到该DOM节点上了，我们可以对该节点做很多事情，比如查询内容和属性，或者其它任何操作，甚至可以删除它，克隆它，或者将它移到到DOM树的其它节点上。</p>
+<p>文档上的任何内容，我们都可以使用JavaScript和DOM API来访问，所以类似地，我们也可以访问上面的无序列表，唯一的问题是该元素没有ID属性，如果ID的话就可以使用相同的方式，或者使用如下getElementsByTagName方式：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">var</span> allUnorderedLists = document.getElementsByTagName('ul');  <br><span style="color: #008000;">//</span><span style="color: #008000;"> 'getElementsByTagName'返回的是一个节点集合</span><span style="color: #008000;"><br>//</span><span style="color: #008000;"> - 和数组有点相似</span></pre>
+</div>
+<h2><strong>getElementsByTagName</strong></h2>
+<p>getElementsByTagName方法返回的是一个节点集合，和数组类似也有length属性，重要的一个特性是他是live的——如果你在该元素里添加一个新的li元素，这个集合就会自动更新，介于他和数组类型，所以可以和访问数组一样的方法来访问，所以从0开始：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> 访问无序列表: [0]索引</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> unorderedList = document.getElementsByTagName('ul')[0];<br><br><span style="color: #008000;">//</span><span style="color: #008000;"> 获取所有的li集合:  </span><span style="color: #008000;"><br></span><span style="color: #0000ff;">var</span> allListItems = unorderedList.getElementsByTagName('li');<br><br><span style="color: #008000;">//</span><span style="color: #008000;"> 循环遍历</span><span style="color: #008000;"><br></span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">var</span> i = 0, length = allListItems.length; i &lt; length; i++) {<br>    <span style="color: #008000;">//</span><span style="color: #008000;"> 弹出该节点的text内容</span><span style="color: #008000;"><br></span>    alert(allListItems[i].firstChild.data);<br>} </pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>以下图例更清晰地展示了DOM获取的知识：</p>
+<p><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/2012021620011175.png" alt="" style="width: 545px;"></p>
+<h2><strong>DOM穿梭</strong></h2>
+<p>“穿梭”这个词主要是用来描述通过DOM查找节点，DOM API提供了大量的节点属性让我们来往上或者往下查询节点。</p>
+<p>所有的节点都有这些属性，都是可以用于访问相关的node节点：</p>
+<ol>
+<li><strong>Node.childNodes</strong>: 访问一个单元素下所有的直接子节点元素，可以是一个可循环的类数组对象。该节点集合可以保护不同的类型的子节点（比如text节点或其他元素节点）。</li>
+<li><strong>Node.firstChild</strong>: 与‘childNodes’数组的第一个项(‘Element.childNodes[0]‘)是同样的效果，仅仅是快捷方式。</li>
+<li><strong>Node.lastChild</strong>: 与‘childNodes’数组的最后一个项(‘Element.childNodes[Element.childNodes.length-1]‘)是同样的效果，仅仅是快捷方式。shortcut.</li>
+<li><strong>Node.parentNode</strong>: 访问当前节点的父节点，父节点只能有一个，祖节点可以用‘Node.parentNode.parentNode’的形式来访问。</li>
+<li><strong>Node.nextSibling</strong>: 访问DOM树上与当前节点同级别的下一个节点。</li>
+<li><strong>Node.previousSibling</strong>: 访问DOM树上与当前节点同级别的上一个节点。</li>
+</ol>
+<p><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/2012021421464211.png" alt="" style="width: 545px;"></p>
+<p>通过这张图，理解起来就简单多了，但有个非常重要的知识点：那就是元素之间不能有空格，如果ul和li之间有空格的话，就会被认为是内容为空的text node节点，这样ul.childNodes[0]就不是第一个li元素了。相应地，&lt;p&gt;的下一个节点也不是&lt;ul&gt;，因为&lt;p&gt;和&lt;ul&gt;之间有一个空行的节点，一般遇到这种情况需要遍历所有的子节点然后判断nodeType类型，1是元素，2是属性，3是text节点，详细的type类型可以通过<a href="https://developer.mozilla.org/En/DOM/Node.nodeType" target="_blank">此地址</a>：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>    Node.ELEMENT_NODE == 1<br>    Node.ATTRIBUTE_NODE == 2<br>    Node.TEXT_NODE == 3<br>    Node.CDATA_SECTION_NODE == 4<br>    Node.ENTITY_REFERENCE_NODE == 5<br>    Node.ENTITY_NODE == 6<br>    Node.PROCESSING_INSTRUCTION_NODE == 7<br>    Node.COMMENT_NODE == 8<br>    Node.DOCUMENT_NODE == 9<br>    Node.DOCUMENT_TYPE_NODE == 10<br>    Node.DOCUMENT_FRAGMENT_NODE == 11<br>    Node.NOTATION_NODE == 12</pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h1>总结</h1>
+<p>原生的DOM方法和属性足够我们日常的应用了，本章节我们只列举了一些例子，下一章节我们列举更多的例子，还会包括浏览器事件模型。</p>
+<h1>同步与推荐</h1>
+<p>本文已同步至目录索引：<span style="font-size: 14pt;"><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html" target="_blank">深入理解JavaScript系列</a></span></p>
+<p>深入理解JavaScript系列文章，包括了原创，翻译，转载等各类型的文章，如果对你有用，请推荐支持一把，给大叔写作的动力。</p></div><div id="MySignature"></div>
+        <div class="clear"></div>
+        <div id="blog_post_info_block">
+        <div id="blog_post_info"><div id="green_channel">
+绿色通道：
+<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(2351331,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+<a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a>
+<a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://space.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" target="_blank">与我联系</a>
+<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/icon_weibo_24.png" alt=""></a>
+</div>
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/TomXu/" target="_blank"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/u349491.jpg" class="author_avatar" alt=""></a>
+<div id="author_profile_detail" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/TomXu/">汤姆大叔</a><br>
+<a href="http://home.cnblogs.com/u/TomXu/followees">关注 - 19</a><br>
+<a href="http://home.cnblogs.com/u/TomXu/followers">粉丝 - 6342</a>
+</div>
+</div>
+<div class="clear"></div>
+<div id="author_profile_honor">荣誉：<a href="http://www.cnblogs.com/expert/" target="_blank">推荐博客</a></div>
+<div id="author_profile_follow">
+    <a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a>
+</div>
+</div>
+<div id="div_digg">										
+    <div class="diggit" onclick="votePost(2351331,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">55</span>
+    </div>
+	<div class="buryit" onclick="votePost(2351331,&#39;Bury&#39;)"> 
+		<span class="burynum" id="bury_count">0</span>
+	</div>
+	<div class="clear"></div>	
+	<div class="diggword" id="digg_tips">
+    (请您对文章做出评价)
+    </div>	
+</div>
+</div>
+        <div class="clear"></div>
+        <div id="post_next_prev"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/15/2330143.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/TomXu/archive/2012/02/15/2330143.html" title="发布于2012-02-15 09:12">深入理解JavaScript系列（22）：S.O.L.I.D五大原则之依赖倒置原则DIP</a><br><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2354281.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2354281.html" title="发布于2012-02-16 14:49">大叔手记（20）：ASP.NET MVC中使用jQuery时的浏览器缓存问题</a><br></div>
+    </div>
+</div>
+    <ul class="postmetadata">
+        <li class="icon_cat" id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/TomXu/category/338104.html">[06]JS/jQuery</a>, <a href="http://www.cnblogs.com/TomXu/category/337109.html">[07]Web开发</a></li>
+        <li class="icon_bullet" id="EntryTag">标签: <a href="http://www.cnblogs.com/TomXu/tag/JavaScript/">JavaScript</a>, <a href="http://www.cnblogs.com/TomXu/tag/DOM/">DOM</a></li>
+    </ul>
+</div>
+<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=101461,cb_entryId=2351331,cb_blogApp=currentBlogApp,cb_blogUserGuid='65b02d3c-5b0b-e111-b7b9-842b2b196315',cb_entryCreatedDate='2012/2/16 8:56:00';loadViewCount(cb_entryId);</script>
+<script type="text/javascript">
+    var m = window.__blog.postRendered;
+    if (m) { m(__$("post")); }
+</script>
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) { m(); }
+</script>
+<a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<a class="addcomment" href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#comment_tip">Add your comment</a>
+<h3 id="comments"></h3>
+<div class="feedbackNoItems"></div>
+
+
+<ol class="commentlist" id="commentList">	
+
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2309702" class="layer">#1楼</a><a name="2309702" id="comment_anchor_2309702"></a></cite> <a id="a_comment_author_2309702" href="http://www.cnblogs.com/julyluo/" target="_blank">JulyLuo</a> <a href="http://msg.cnblogs.com/msg/send/JulyLuo" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 09:11</span></small>
+			</h5>
+			<div id="comment_body_2309702" class="blog_comment_body">难道我是沙发，支持一下，这一节写的比前几节要简单一点，终于可以看懂了，并支持大叔出下！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2309702,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2309702,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2309702_avatar" style="display:none;">http://pic.cnitblog.com/face/u95517.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2309712" class="layer">#2楼</a><a name="2309712" id="comment_anchor_2309712"></a></cite> <a id="a_comment_author_2309712" href="http://www.cnblogs.com/leebie/" target="_blank">Jolie-猪莉</a> <a href="http://msg.cnblogs.com/msg/send/Jolie-%e7%8c%aa%e8%8e%89" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 09:21</span></small>
+			</h5>
+			<div id="comment_body_2309712" class="blog_comment_body">配图很精彩～ 大叔V5</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2309712,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2309712,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2309712_avatar" style="display:none;">http://pic.cnitblog.com/face/u353460.jpg?id=22172050</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2309724" class="layer">#3楼</a><a name="2309724" id="comment_anchor_2309724"></a></cite> <a id="a_comment_author_2309724" href="http://www.cnblogs.com/artwl/" target="_blank">artwl</a> <a href="http://msg.cnblogs.com/msg/send/artwl" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 09:32</span></small>
+			</h5>
+			<div id="comment_body_2309724" class="blog_comment_body">通俗易懂</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2309724,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2309724,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2309724_avatar" style="display:none;">http://pic.cnitblog.com/face/u112805.png?id=201209274142</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2309766" class="layer">#4楼</a><a name="2309766" id="comment_anchor_2309766"></a></cite> <a id="a_comment_author_2309766" href="http://www.cnblogs.com/ulcss/" target="_blank">Ya小浩</a> <a href="http://msg.cnblogs.com/msg/send/Ya%e5%b0%8f%e6%b5%a9" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 10:09</span></small>
+			</h5>
+			<div id="comment_body_2309766" class="blog_comment_body">大叔新作，仔细拜读。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2309766,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2309766,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2309960" class="layer">#5楼</a><a name="2309960" id="comment_anchor_2309960"></a></cite> <a id="a_comment_author_2309960" href="http://www.cnblogs.com/wbpmrck/" target="_blank">刺客之家</a> <a href="http://msg.cnblogs.com/msg/send/%e5%88%ba%e5%ae%a2%e4%b9%8b%e5%ae%b6" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 13:11</span></small>
+			</h5>
+			<div id="comment_body_2309960" class="blog_comment_body">很精彩，继续支持。<br>PS：看了大叔的招聘信息，进而了解了一下什么是Knockout和backbone,挺感兴趣的。不知道大叔能否对这2个框架发表一些看法和文章，谢谢~</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2309960,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2309960,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2309960_avatar" style="display:none;">http://pic.cnitblog.com/face/u136049.gif?id=12163526</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2309994" class="layer">#6楼</a><a name="2309994" id="comment_anchor_2309994"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2309994" href="http://www.cnblogs.com/TomXu/" target="_blank">汤姆大叔</a> <a href="http://msg.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 13:46</span></small>
+			</h5>
+			<div id="comment_body_2309994" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2309960" title="查看引用原文">引用</a></legend>刺客之家：<br>很精彩，继续支持。<br>PS：看了大叔的招聘信息，进而了解了一下什么是Knockout和backbone,挺感兴趣的。不知道大叔能否对这2个框架发表一些看法和文章，谢谢~</fieldset><br>关于knockout可以参考我写的系列文章<br>http://www.cnblogs.com/TomXu/archive/2011/11/21/2257154.html<br>关于backbone也是一个很不错的MVC实现的框架，目前项目上都已经用了很久了，有时间会写几篇文章介绍一下的。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2309994,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2309994,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2309994_avatar" style="display:none;">http://pic.cnitblog.com/face/u349491.jpg?id=02230504</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310022" class="layer">#7楼</a><a name="2310022" id="comment_anchor_2310022"></a></cite> <a id="a_comment_author_2310022" href="http://www.cnblogs.com/limits/" target="_blank">@清道夫</a> <a href="http://msg.cnblogs.com/msg/send/%40%e6%b8%85%e9%81%93%e5%a4%ab" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 14:08</span></small>
+			</h5>
+			<div id="comment_body_2310022" class="blog_comment_body">不错，这文章对于老鸟和新手都适用，看后加深了对DOM的熟悉度。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310022,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310022,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2310022_avatar" style="display:none;">http://pic.cnitblog.com/face/366535/20140314080504.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310027" class="layer">#8楼</a><a name="2310027" id="comment_anchor_2310027"></a></cite> <a id="a_comment_author_2310027" href="http://home.cnblogs.com/u/374198/" target="_blank">log琥珀①</a> <a href="http://msg.cnblogs.com/msg/send/log%e7%90%a5%e7%8f%80%e2%91%a0" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 14:10</span></small>
+			</h5>
+			<div id="comment_body_2310027" class="blog_comment_body">谢谢大叔，来的正是时候啊</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310027,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310027,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310117" class="layer">#9楼</a><a name="2310117" id="comment_anchor_2310117"></a></cite> <a id="a_comment_author_2310117" href="http://www.cnblogs.com/MarkRao/" target="_blank">Mark Rao</a> <a href="http://msg.cnblogs.com/msg/send/Mark+Rao" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 15:30</span></small>
+			</h5>
+			<div id="comment_body_2310117" class="blog_comment_body">大叔,能告诉下我你用的是什么画图工具吗?</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310117,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310117,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310136" class="layer">#10楼</a><a name="2310136" id="comment_anchor_2310136"></a></cite> <a id="a_comment_author_2310136" href="http://www.cnblogs.com/wbpmrck/" target="_blank">刺客之家</a> <a href="http://msg.cnblogs.com/msg/send/%e5%88%ba%e5%ae%a2%e4%b9%8b%e5%ae%b6" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 15:53</span></small>
+			</h5>
+			<div id="comment_body_2310136" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2309994" title="查看引用原文">引用</a></legend>汤姆大叔：<br><fieldset class="comment_quote"><legend>引用</legend>刺客之家：<br>很精彩，继续支持。<br>PS：看了大叔的招聘信息，进而了解了一下什么是Knockout和backbone,挺感兴趣的。不知道大叔能否对这2个框架发表一些看法和文章，谢谢~</fieldset><br>关于knockout可以参考我写的系列文章<br>http://www.cnblogs.com/TomXu/archive/2011/11/21/2257154.html<br>关于backbone也是一个很不错的MVC实现的框架，目前项目上都已经用了很久了，有时间会写几篇文章介绍一下的。</fieldset><br><br>又是一个值得收藏的系列。我的evernote流量又要爆了。。。非常感谢！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310136,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310136,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2310136_avatar" style="display:none;">http://pic.cnitblog.com/face/u136049.gif?id=12163526</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310235" class="layer">#11楼</a><a name="2310235" id="comment_anchor_2310235"></a></cite> <a id="a_comment_author_2310235" href="http://home.cnblogs.com/u/136076/" target="_blank">清風揚諰</a> <a href="http://msg.cnblogs.com/msg/send/%e6%b8%85%e9%a2%a8%e6%8f%9a%e8%ab%b0" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 17:20</span></small>
+			</h5>
+			<div id="comment_body_2310235" class="blog_comment_body">这篇的深度好像比前几篇低了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310235,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310235,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310267" class="layer">#12楼</a><a name="2310267" id="comment_anchor_2310267"></a></cite> <a id="a_comment_author_2310267" href="http://www.cnblogs.com/okbeng/" target="_blank">okbeng</a> <a href="http://msg.cnblogs.com/msg/send/okbeng" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 17:42</span></small>
+			</h5>
+			<div id="comment_body_2310267" class="blog_comment_body"><a href="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/2012021617393044.jpg" target="_blank"><img src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/2012021617393044.jpg" alt="" border="0" onload="javascript:if(this.width&gt;500) this.width=500;" width="500"></a><br>这里面写错了，getElementById是document才有的方法，像Element、text这些从核心node对象继承而来的是没有该方法的</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310267,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310267,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310345" class="layer">#13楼</a><a name="2310345" id="comment_anchor_2310345"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2310345" href="http://www.cnblogs.com/TomXu/" target="_blank">汤姆大叔</a> <a href="http://msg.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 20:02</span></small>
+			</h5>
+			<div id="comment_body_2310345" class="blog_comment_body"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310267" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2310267);">@</a>okbeng<br>多谢提醒，已修正。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310345,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310345,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2310345_avatar" style="display:none;">http://pic.cnitblog.com/face/u349491.jpg?id=02230504</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310391" class="layer">#14楼</a><a name="2310391" id="comment_anchor_2310391"></a></cite> <a id="a_comment_author_2310391" href="http://www.cnblogs.com/zhng/" target="_blank">_@zhng</a> <a href="http://msg.cnblogs.com/msg/send/_%40zhng" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 21:16</span></small>
+			</h5>
+			<div id="comment_body_2310391" class="blog_comment_body">咋地感觉东西在nettuts上有呢？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310391,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310391,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310405" class="layer">#15楼</a><a name="2310405" id="comment_anchor_2310405"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2310405" href="http://www.cnblogs.com/TomXu/" target="_blank">汤姆大叔</a> <a href="http://msg.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 21:39</span></small>
+			</h5>
+			<div id="comment_body_2310405" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310391" title="查看引用原文">引用</a></legend>_@zhng：咋地感觉东西在nettuts上有呢？</fieldset><br>就是从这翻译来的哦，文章开头注明的了哦</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310405,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310405,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2310405_avatar" style="display:none;">http://pic.cnitblog.com/face/u349491.jpg?id=02230504</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310425" class="layer">#16楼</a><a name="2310425" id="comment_anchor_2310425"></a></cite> <a id="a_comment_author_2310425" href="http://www.cnblogs.com/objectboy/" target="_blank">objectboy</a> <a href="http://msg.cnblogs.com/msg/send/objectboy" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-16 22:06</span></small>
+			</h5>
+			<div id="comment_body_2310425" class="blog_comment_body">大叔可谓精通</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310425,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310425,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2310425_avatar" style="display:none;">http://pic.cnitblog.com/face/u219261.jpg?id=21125218</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310499" class="layer">#17楼</a><a name="2310499" id="comment_anchor_2310499"></a></cite> <a id="a_comment_author_2310499" href="http://www.cnblogs.com/r01cn/" target="_blank">r01cn</a> <a href="http://msg.cnblogs.com/msg/send/r01cn" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-17 04:25</span></small>
+			</h5>
+			<div id="comment_body_2310499" class="blog_comment_body">第1段：<br><b>DOM（Document Object Model，文档对象模型）是一个通过和JavaScript进行内容交互的API。</b>Javascript和DOM一般经常作为一个整体，因为Javascript通常都是用来进行DOM操作和交互的。<br><br>原文是这样的：<br>The Document Object Model, normally abbreviated to DOM, is the API through which JavaScript interacts with content within a website. JavaScript and the DOM are usually seen as a single entity since JavaScript is most commonly used for this purpose (interacting with content on the web). The DOM API is used to access, traverse and manipulate HTML and XML documents.<br>翻译：<br>文档对象模型，通常缩写为DOM，是JavaScript用来与<b>网站内容进行交互</b>的API。一般把JavaScript和DOM视为一个整体，因为JavaScript通常就是用于这一目的的（与web内容进行交互）。DOM API用于访问、遍历、和维护HTML以及XML文档。<br><br>感觉第一句有点错误，原文的概念才是准确的。DOM的本质是HTML或XML文档的模型表示（把HTML表示成DOM）并提供一些进行操作的属性和方法，我们一般总是使用脚本语言（JavaScript）并借助于这个DOM API对一个HTML或XML所形成的DOM进行操作（访问、遍历、和维护）。<br><br>呵呵，这可不是找茬，谁也做不到使翻译十分准确，我博客里的那些翻译就更次了。给个推荐～～</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310499,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310499,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2310499_avatar" style="display:none;">http://pic.cnitblog.com/face/u85296.jpg?id=20181922</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2310991" class="layer">#18楼</a><a name="2310991" id="comment_anchor_2310991"></a></cite> <a id="a_comment_author_2310991" href="http://home.cnblogs.com/u/322503/" target="_blank">东方翔</a> <a href="http://msg.cnblogs.com/msg/send/%e4%b8%9c%e6%96%b9%e7%bf%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-17 15:28</span></small>
+			</h5>
+			<div id="comment_body_2310991" class="blog_comment_body">博主，== 判断时是会转换类型进行比较的吧？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2310991,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2310991,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2311262" class="layer">#19楼</a><a name="2311262" id="comment_anchor_2311262"></a></cite> <a id="a_comment_author_2311262" href="http://www.cnblogs.com/lonny/" target="_blank">jewely</a> <a href="http://msg.cnblogs.com/msg/send/jewely" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-17 20:37</span></small>
+			</h5>
+			<div id="comment_body_2311262" class="blog_comment_body">大叔文章只有这篇是完全能看懂的。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2311262,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2311262,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2311301" class="layer">#20楼</a><a name="2311301" id="comment_anchor_2311301"></a></cite> <a id="a_comment_author_2311301" href="http://home.cnblogs.com/u/376555/" target="_blank">雪夜 尘封</a> <a href="http://msg.cnblogs.com/msg/send/%e9%9b%aa%e5%a4%9c+%e5%b0%98%e5%b0%81" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-17 22:06</span></small>
+			</h5>
+			<div id="comment_body_2311301" class="blog_comment_body">好东西  拷走了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2311301,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2311301,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2315554" class="layer">#21楼</a><a name="2315554" id="comment_anchor_2315554"></a></cite> <a id="a_comment_author_2315554" href="http://home.cnblogs.com/u/343649/" target="_blank">akiisaki</a> <a href="http://msg.cnblogs.com/msg/send/akiisaki" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-23 19:33</span></small>
+			</h5>
+			<div id="comment_body_2315554" class="blog_comment_body">在JavaScript里所有的数组都是浮点型的<br><br>吐槽：所有的Number都是float的形式保存。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2315554,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2315554,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2315608" class="layer">#22楼</a><a name="2315608" id="comment_anchor_2315608"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2315608" href="http://www.cnblogs.com/TomXu/" target="_blank">汤姆大叔</a> <a href="http://msg.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-23 21:14</span></small>
+			</h5>
+			<div id="comment_body_2315608" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2315554" title="查看引用原文">引用</a></legend>akiisaki：<br>在JavaScript里所有的数组都是浮点型的<br>吐槽：所有的Number都是float的形式保存。</fieldset><br>多谢了，拼写错误已修正。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2315608,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2315608,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2315608_avatar" style="display:none;">http://pic.cnitblog.com/face/u349491.jpg?id=02230504</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2412527" class="layer">#23楼</a><a name="2412527" id="comment_anchor_2412527"></a></cite> <a id="a_comment_author_2412527" href="http://www.cnblogs.com/unbreakable/" target="_blank">unbreakable</a> <a href="http://msg.cnblogs.com/msg/send/unbreakable" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-07-02 20:05</span></small>
+			</h5>
+			<div id="comment_body_2412527" class="blog_comment_body">”左右的函数都存放在window对象下面“不明白呀？？？求指点！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2412527,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2412527,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2412527_avatar" style="display:none;">http://pic.cnitblog.com/face/u394431.jpg?id=03222059</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#3088418" class="layer">#24楼</a><a name="3088418" id="comment_anchor_3088418"></a><span id="comment-maxId" style="display:none;">3088418</span><span id="comment-maxDate" style="display:none;">2014/12/17 20:46:12</span></cite> <a id="a_comment_author_3088418" href="http://www.cnblogs.com/accordion/" target="_blank">royalrover</a> <a href="http://msg.cnblogs.com/msg/send/royalrover" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-12-17 20:46</span></small>
+			</h5>
+			<div id="comment_body_3088418" class="blog_comment_body"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#2315608" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2315608);">@</a>汤姆大叔<br>大叔怎么理解所有的数字都是浮点型呢？数字只有整数和浮点两种，这也是规范里提到的。难道整数在内部也是按照浮点类型存储？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3088418,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3088418,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3088418_avatar" style="display:none;">http://pic.cnitblog.com/face/691726/20141112174212.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+</ol>
+
+<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" id="lnk_RefreshComments" onclick="return RefreshCommentList();">刷新评论</a><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16/2351331.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="site_nav_under"><a href="http://www.imooc.com/view/158?from=cnblogs" target="_blank"><b>【免费课程】系列： Maya3D建模攻略——葵花宝典     </b></a><br><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://www.rongcloud.cn/promotion" target="_blank">融云，免费为你的App加入IM功能——让你的App“聊”起来！！</a><br><a href="http://bce.baidu.com/apply/index.html?hmsr=cnblog&hmmd=&hmpl=&hmkw=&hmci=" target="_blank">【活动】百度开放云限量500台，抓紧时间申请啦！</a></div>
+<div id="opt_under_post"></div>
+<script type="text/javascript">
+    var enableGoogleAd = canShowAdsense(); var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];
+    fixPostBodyFormat();
+</script>
+<div id="ad_under_post_holder">
+<script type="text/javascript">
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+    })();
+</script>
+<script type="text/javascript">
+    try {
+        if (enableGoogleAd) {
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C1_sitehome', [300, 250], 'div-gpt-ad-1346480159711-0').addService(googletag.pubads());
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1410860226396-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        };
+    } catch (e) { }
+</script><iframe src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/container.html" style="visibility: hidden; display: none;"></iframe>
+<div id="google_ad_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1346480159711-0" style="width:300px; height:250px;">
+    <script type="text/javascript">
+        try {
+            if (enableGoogleAd) {
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1346480159711-0'); });            
+            } else {
+                $('#div-gpt-ad-1346480159711-0').hide();
+            }
+    } catch (e) { }
+    </script>
+    <div id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom;"></iframe></div><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" width="0" height="0" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom; visibility: hidden; display: none;"></iframe></div>
+</div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/515281/" target="_blank">天猫国际迎大型卖场入驻潮：欧美日韩都有</a><br> ·  <a href="http://news.cnblogs.com/n/515280/" target="_blank">周鸿祎不做“大神”做“自己”</a><br> ·  <a href="http://news.cnblogs.com/n/515279/" target="_blank">Microsoft开源跨平台的序列化库——Bond</a><br> ·  <a href="http://news.cnblogs.com/n/515278/" target="_blank">研究发现 Java代码大多数是无价值的</a><br> ·  <a href="http://news.cnblogs.com/n/515277/" target="_blank">李开复回归创新工场 患淋巴癌后已告别17个月</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="google_ad_c2" class="c_ad_block">
+<div id="div-gpt-ad-1410860226396-0" style="width:468px; height:60px;">
+<script type="text/javascript">
+try {
+    if (enableGoogleAd) {
+        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1410860226396-0'); });
+    } else {
+        $('#div-gpt-ad-1346480159711-0').hide();
+    }
+} catch (e) { }
+</script>
+<div id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom;"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/515258/" target="_blank">Bitmap的秘密</a><br> ·  <a href="http://kb.cnblogs.com/page/515151/" target="_blank">我该如何向非技术人解释SQL注入？</a><br> ·  <a href="http://kb.cnblogs.com/page/514938/" target="_blank">使用2-3法则设计分布式数据访问层</a><br> ·  <a href="http://kb.cnblogs.com/page/514866/" target="_blank">数据清洗经验</a><br> ·  <a href="http://kb.cnblogs.com/page/514725/" target="_blank">设计中的变与不变</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+$(function () {
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 200);
+});
+</script>
+</div>
+
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            
+<div id="about">
+<div>
+<h2 id="about_title">About</h2>
+<div id="about_body">
+<div id="blog-news"><p><img style="float:left;margin-right:10px" alt="" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/tom.jpg" height="150" width="150"><strong>目前工作</strong>：项目管理（PMP）<br>
+<strong>曾获认证</strong>：MCP、MCSE、MCDBA、MCTS、MCITP、MCPD、PMP、MVP<br>
+<strong>略有小成</strong>：软件架构、设计模式、OOD、OOP、DI、IOC、AOP、SOA<br>
+<strong>兴趣爱好</strong>：技术、管理、英文、吃喝玩乐乱侃空
+</p>
+<p style="clear:both"></p>
+<br>
+熟悉Waterfall、Agile(Scrum&amp;XP)，染指C#、ASP.NET、MVC、EF、NHibernate、SQL Server、Oracle、JavaScript、HTML5、CSS3、JQuery、Knockout、Silverlight、WPF、WCF、ADFS等技术<br>
+<br>
+<span style="color: red;">注：</span>本人翻译的技术文章皆不是逐句翻译，而是按照自己的理解翻译的（当然也去除了一些不影响理解但本人实在不知道如何组织的句子）。<br>
+<br>
+<p style="clear:both"></p>
+<fieldset> <legend>作品上市</legend>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/zcover.jpg" alt="" width="150">
+[1] <a href="http://item.jd.com/11644151.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://product.china-pub.com/4559565" target="_blank">China-Pub</a>
+<br>
+[3] <a href="http://www.amazon.cn/gp/product/B00SNCI018//ref=fs_rd_1" target="_blank">卓越亚马逊</a>
+<br>
+[4] <a href="http://product.dangdang.com/23648815.html" target="_blank">当当网</a>
+<br>
+[5] <a href="http://book.douban.com/subject/25980651/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=%E7%BC%96%E5%86%99%E5%8F%AF%E6%B5%8B%E8%AF%95%E7%9A%84JavaScript%E4%BB%A3%E7%A0%81" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<p style="clear:both"></p><br>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/zcover(1).jpg" alt="" width="150">
+[1] <a href="http://item.jd.com/11542504.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://product.china-pub.com/3770506" target="_blank">China-Pub</a>
+<br>
+[3] <a href="http://www.amazon.cn/gp/product/B00NIEA9DS/ref=fs_rd_1" target="_blank">卓越亚马逊</a>
+<br>
+[4] <a href="http://product.dangdang.com/23563374.html" target="_blank">当当网</a>
+<br>
+[5] <a href="http://book.douban.com/subject/25980651/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=Backbone.js%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<p style="clear:both"></p><br>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/zcover(2).jpg" alt="" width="150">
+[1] <a href="http://item.jd.com/11462962.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://product.china-pub.com/3770057" target="_blank">China-Pub</a>
+<br>
+[3] <a href="http://www.amazon.cn/Web%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E4%B8%9B%E4%B9%A6-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Bootstrap-%E5%BE%90%E6%B6%9B/dp/B00KCCM4HI/" target="_blank">卓越亚马逊</a>
+<br>
+[4] <a href="http://product.dangdang.com/23475042.html" target="_blank">当当网</a>
+<br>
+[5] <a href="http://book.douban.com/subject/25886197/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Bootstrap" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<p style="clear:both"></p><br>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/shupi.jpg" alt="" width="150">
+[1] <a href="http://item.jd.com/11416981.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://product.china-pub.com/3769483" target="_blank">China-Pub</a>
+<br>
+[3] <a href="http://www.amazon.cn/JavaScript%E5%90%AF%E7%A4%BA%E5%BD%95-%E7%BE%8E-Cody-Lindley/dp/B00IR39PNU/" target="_blank">卓越亚马逊</a>
+<br>
+[4] <a href="http://product.dangdang.com/23433090.html" target="_blank">当当网</a>
+<br>
+[5] <a href="http://book.douban.com/subject/25837367/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=JavaScript%E5%90%AF%E7%A4%BA%E5%BD%95" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<p style="clear:both"></p><br>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/o_jsdp.jpg" alt="" width="150">
+[1] <a href="http://book.jd.com/11253887.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://www.amazon.cn/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BE%8E-Addy-Osmani/dp/B00D6MT3LG/" target="_blank">卓越亚马逊</a>
+<br>
+[3] <a href="http://product.dangdang.com/product.aspx?product_id=23266635" target="_blank">当当网</a>
+<br>
+[4] <a href="http://product.china-pub.com/3768064" target="_blank">China-Pub</a>
+<br>
+[5] <a href="http://book.douban.com/subject/24744217/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20Addy%20Osmani" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<div style="clear:both"></div>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/o_EloquentJavaScript.jpg" alt="" width="150">
+[1] <a href="http://book.360buy.com/11091494.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://www.amazon.cn/JavaScript%E7%BC%96%E7%A8%8B%E7%B2%BE%E8%A7%A3-%E5%93%88%E5%BC%97%E8%B4%9D%E5%85%8B/dp/B009A7D25E/ref=sr_1_11" target="_blank">卓越亚马逊</a>
+<br>
+[3] <a href="http://union.dangdang.com/transfer/transfer.aspx?from=P-263982&backurl=http://product.dangdang.com/product.aspx?product_id=22873894" target="_blank">当当网</a>
+<br>
+[4] <a href="http://product.china-pub.com/3684096" target="_blank">China-Pub</a>
+<br>
+[5] <a href="http://book.douban.com/subject/19933548/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=JavaScript%E7%BC%96%E7%A8%8B%E7%B2%BE%E8%A7%A3" target="_blank">淘宝网</a>
+<br>
+<br>
+<a href="http://www.cnblogs.com/TomXu/archive/2012/10/21/JSError.html" target="_blank">本书勘误</a>
+</p>
+
+</fieldset><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/TomXu/">汤姆大叔</a><br>园龄：<a href="http://home.cnblogs.com/u/TomXu/" title="入园时间：2011-11-10">3年3个月</a><br>荣誉：<a href="http://www.cnblogs.com/expert/">推荐博客</a><br>粉丝：<a href="http://home.cnblogs.com/u/TomXu/followers/">6342</a><br>关注：<a href="http://home.cnblogs.com/u/TomXu/followees/">19</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger(&#39;65b02d3c-5b0b-e111-b7b9-842b2b196315&#39;)">+加关注</a></div></div></div>
+<script type="text/javascript">loadBlogNews();</script>
+</div>
+</div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            
+<div id="mySearchWrapper">
+    <div id="mySearch">
+        <input type="image" src="./深入理解JavaScript系列（23）：JavaScript与DOM（上）——也适用于新手 - 汤姆大叔 - 博客园_files/btnsearch.gif" id="btnZzk" class="submit" onclick="zzk_go();return false;">
+        <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword"></label>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            <div id="side-recent-posts">
+        <h2>最新随笔</h2>
+        <ul class="bullet">
+                <li><a href="http://www.cnblogs.com/TomXu/p/4266774.html">新书《编写可测试的JavaScript代码 》出版，感谢支持</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756865.html">MVC之前的那点事儿系列（10）：MVC为什么不再需要注册通配符（*.*）了？</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756863.html">MVC之前的那点事儿系列（9）：MVC如何在Pipeline中接管请求的？</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756858.html">MVC之前的那点事儿系列（8）：UrlRouting的理解</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756854.html">MVC之前的那点事儿系列（7）：WebActivator的实现原理详解</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756846.html">MVC之前的那点事儿系列（6）：动态注册HttpModule</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756843.html">MVC之前的那点事儿系列（5）：Http Pipeline详细分析（下）</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756832.html">MVC之前的那点事儿系列（4）：Http Pipeline详细分析（上）</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756824.html">MVC之前的那点事儿系列（3）：HttpRuntime详解分析（下）</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756813.html">MVC之前的那点事儿系列（2）：HttpRuntime详解分析（上）</a></li>
+        </ul>
+    </div><div id="side-recent-comments">
+        <h2>最新评论</h2>
+        <ul class="voice">
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3129282">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3129282">
+                        正在看您翻译的《Javascript编程精解》，大叔太厉害了！
+                        -- 天琊蓝
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html#3128077">Re:深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html#3128077">
+                        学习了~
+                        -- 云一样飘过
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html#3125642">Re:深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html#3125642">
+                        十分感谢，正在学习~
+                        -- 灰丶一样
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/archive/2012/10/22/2733027.html#3125544">Re:《JavaScript编程精解》回馈网友，汤姆大叔送书30本</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/archive/2012/10/22/2733027.html#3125544">
+                        抢书喽，抢抢
+                        -- YaChenYa
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/archive/2012/02/24/2353434.html#3125384">Re:深入理解JavaScript系列（29）：设计模式之装饰者模式</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/archive/2012/02/24/2353434.html#3125384">
+                        这个模式挺好，今天用上了
+                        -- Jeff.Zhong
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3123195">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3123195">
+                        支持啊。。。。
+                        -- 无眠
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3122872">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3122872">
+                        大叔 又出书了 厉害
+                        -- lordma
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3122510">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3122510">
+                        mark
+                        -- 舒元华
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3122253">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3122253">
+                        大叔又出书了， 恭喜。<br>那本《Javascript启示录》很棒
+                        -- Frank.Fan
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3122245">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3122245">
+                        有没有试读章节哇？
+                        -- 幻天芒
+                    </a>
+                </li>
+        </ul>
+    </div></div>
+            <div id="sideRight">
+            <div id="side-archives">
+        <h2>随笔档案</h2>
+        <ul class="date">
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2015/02.html">2015年2月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2014/06.html">2014年6月(7)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2014/05.html">2014年5月(6)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2014/03.html">2014年3月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2013/06.html">2013年6月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/10.html">2012年10月(2)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/07.html">2012年7月(3)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/04.html">2012年4月(12)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/03.html">2012年3月(5)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/02.html">2012年2月(18)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/01.html">2012年1月(14)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2011/12.html">2011年12月(45)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2011/11.html">2011年11月(28)</a></li>
+        </ul>
+    </div>    
+    
+    
+    
+    
+
+
+        
+        
+        
+        
+        
+<div id="side-link-341714">
+            <h2>[01]汤姆大叔系列博文</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/10/2283385.html" target="_blank">[01]大叔手记全集</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/11/21/2257154.html" target="_blank">[02]Knockout应用开发指南</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/11/25/2263050.html" target="_blank">[03]微软ASP.NET站点部署指南</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/06/2277499.html" target="_blank">[04]HTML5学习笔记简明版</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2284773.html" target="_blank">[05]大叔翻译博文索引</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html" target="_blank">[06]深入理解JavaScript系列</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/p/3756794.html" target="_self">[07]MVC之前的那点事儿系列</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-345293">
+            <h2>[04]推荐博友精选好文</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/peterzb/archive/2009/06/14/1502918.html" target="_blank">[01]C# WinForm开发系列</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/lifepoem/archive/2011/12/16/2288017.html" target="_blank">[02]LINQ之路</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/xiao-f/archive/2011/12/19/lang.html" target="_blank">[03]Javascript面向对象扩展库</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-348581">
+            <h2>[05]推荐外部精选好文</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://kangax.github.com/es5-compat-table/" target="_blank">[01]ECMAScript 5浏览器兼容表</a>
+                        </li>
+                        <li>
+                            <a href="http://kb.cnblogs.com/page/127995/" target="_blank">[02]Javascript 面向对象编程</a>
+                        </li>
+            </ul>
+        </div></div>
+            <div id="sideLeft">
+            <div id="side-calendar">
+        <h2>日历</h2>
+        <div id="blog-calendar"><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="日历">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/01/01&#39;);return false;">&lt;</a></td><td align="center">2012年2月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/03/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/03.html"><u>3</u></a></td><td class="CalWeekendDay" align="center">4</td></tr><tr><td class="CalWeekendDay" align="center">5</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/06.html"><u>6</u></a></td><td align="center">7</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/08.html"><u>8</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/09.html"><u>9</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/10.html"><u>10</u></a></td><td class="CalWeekendDay" align="center">11</td></tr><tr><td class="CalWeekendDay" align="center">12</td><td align="center">13</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/14.html"><u>14</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/15.html"><u>15</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/16.html"><u>16</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/17.html"><u>17</u></a></td><td class="CalWeekendDay" align="center">18</td></tr><tr><td class="CalWeekendDay" align="center">19</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/20.html"><u>20</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/21.html"><u>21</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/22.html"><u>22</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/23.html"><u>23</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/24.html"><u>24</u></a></td><td class="CalWeekendDay" align="center">25</td></tr><tr><td class="CalWeekendDay" align="center">26</td><td align="center">27</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/28.html"><u>28</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/02/29.html"><u>29</u></a></td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td></tr><tr><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td><td class="CalOtherMonthDay" align="center">10</td></tr>
+</tbody></table></div>
+    </div><div id="side-categories">
+        <h2>随笔分类</h2>
+        <ul class="folder">
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/335665.html">[01].Net Framework(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/338101.html">[02]C#(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/338102.html">[03]ASP.NET(6)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/335666.html">[04]ASP.NET MVC(19)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/336175.html">[05]HTML5/CSS3(18)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/338104.html">[06]JS/jQuery(66)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/337109.html">[07]Web开发(62)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/336771.html">[08]Knockout(15)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/338040.html">[09]配置管理(13)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/337899.html">[10]项目管理(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/340064.html">[11]大叔手记(22)</a>
+                </li>
+        </ul>
+    </div><div id="side-top-posts-custom">
+    <h2>推荐排行榜</h2>
+    <div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html">1. 深入理解JavaScript系列(327)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html">2. 深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点(278)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/21/2292722.html">3. 大叔手记（12）：我的一次面试经历（谈大叔如何应对面试官）(239)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/02/23/2364425.html">4. 大叔手记（21）：汤姆大叔博客园开博100天总结(206)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/29/2290308.html">5. 深入理解JavaScript系列（2）：揭秘命名函数表达式(136)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/01/05/2305453.html">6. 深入理解JavaScript系列（5）：强大的原型和原型链(111)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/30/2288372.html">7. 深入理解JavaScript系列（3）：全面解析Module模式(109)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/01/12/2308594.html">8. 深入理解JavaScript系列（10）：JavaScript核心（晋级高手必读篇）(107)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/19/2291448.html">9. 大叔手记（10）：别再让面试官问你单例（暨6种实现方式让你堵住面试官的嘴）(90)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/11/22/2258849.html">10. 最锋利的Visual Studio Web开发工具扩展：Web Essentials详解(83)</a></li></ul></div>
+</div><div id="side-top-posts">
+    <h2>阅读排行榜</h2>
+    <div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html">1. 深入理解JavaScript系列(205772)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html">2. 深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点(85633)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/11/21/2257154.html">3. Knockout应用开发指南（完整版） 目录索引(57228)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/29/2290308.html">4. 深入理解JavaScript系列（2）：揭秘命名函数表达式(45392)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/30/2288372.html">5. 深入理解JavaScript系列（3）：全面解析Module模式(34959)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/01/12/2308594.html">6. 深入理解JavaScript系列（10）：JavaScript核心（晋级高手必读篇）(34044)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/01/05/2305453.html">7. 深入理解JavaScript系列（5）：强大的原型和原型链(33290)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/31/2289423.html">8. 深入理解JavaScript系列（4）：立即调用的函数表达式(31987)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/10/22/2733027.html">9. 《JavaScript编程精解》回馈网友，汤姆大叔送书30本(31893)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/21/2292722.html">10. 大叔手记（12）：我的一次面试经历（谈大叔如何应对面试官）(31057)</a></li></ul></div>
+</div><div id="side-link-342866">
+            <h2>[02]汤姆大叔推荐单篇</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/14/2286225.html" target="_blank">[01]大型JavaScript应用架构模式</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/19/2291448.html" target="_blank">[02]别再让面试官问你单例</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/21/2292722.html" target="_blank">[03]大叔的一次面试经历</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-345292">
+            <h2>[03]推荐博友算法相关</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/huangxincheng/category/340146.html" target="_blank">[01]算法系列15天速成</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/jinzhao/archive/2011/11/30/2268569.html" target="_blank">[02]算法实现大全</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/tuyile006/category/95974.html" target="_blank">[03]常用算法</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/Jax/category/57279.html" target="_blank">[04]算法大全</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/weidagang2046/archive/2009/07/31/1535902.html" target="_blank">[05]博客积分算法探讨</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/chehaoj/archive/2010/11/23/1885497.html" target="_blank">[06]常见算法推演</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/wangfupeng1988/archive/2011/12/26/2302216.html" target="_blank">[07]眼睛直观感受几种常用排序算法</a>
+                        </li>
+            </ul>
+        </div></div>
+            
+                <div id="sideContainer"></div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/mvc/blog/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                loadBlogDefaultCalendar();
+                                loadBlogSideBlocks();
+                                var m = window.__blog.sideContainerRendered;
+                                if (m) { m(__$("sideContainer")); }
+                                window.__blog.sidebar.__layout();
+                            }
+                        }
+                    });
+
+                </script>
+            
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            
+<p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright ©2015 汤姆大叔
+</p>
+<p>
+<a href="http://www.cnblogs.com/">博客园</a>
+</p>
+</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+<!--PageEndHtml Block Begin-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("body").prepend($("#div_digg").css({
+            "position": "fixed", "right": "0px", "bottom": "0px", "z-index": "10", "background-color": "white", "margin": "10px", "padding": "10px", "border": "1px solid #cccccc"
+        }));
+      $(".cnblogs_code_toolbar").hide();
+    });
+</script>
+<!--PageEndHtml Block End-->
+
+
+</body></html>

@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/analytics.js"></script>
+<meta charset="utf-8">
+<title>深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/bundle-Minyx2_Lite.css">
+<link type="text/css" rel="stylesheet" href="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/101461.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/TomXu/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/TomXu/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/TomXu/wlwmanifest.xml">
+<script type="text/javascript" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/encoder.js"></script><script async="" type="text/javascript" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/gpt.js"></script><script src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'TomXu', cb_enable_mathjax=false;</script>
+<script src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/blog-common.js" type="text/javascript"></script>
+<script src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/bundle-Minyx2_Lite.js" language="javascript" type="text/javascript"></script>
+<script async="" type="text/javascript" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/pubads_impl_56.js"></script><script src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/expansion_embed.js"></script><script type="text/javascript" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/osd.js"></script></head>
+<body>
+<a name="top"></a>
+
+
+<div id="container">
+    <a class="minyx" href="http://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            
+                
+Posts - 143, 
+Articles - 1, 
+Comments - 18868
+<!---->
+            
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="http://www.cnblogs.com/">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="http://www.cnblogs.com/TomXu/admin/EditPosts.aspx">Dashboard</a></li>
+        <li>
+            <a id="lnkLogin" href="http://passport.cnblogs.com/login.aspx?ReturnUrl=http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html">Login</a></li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="http://www.cnblogs.com/TomXu/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="http://space.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="http://www.cnblogs.com/TomXu/gallery.html">Gallery</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="http://www.cnblogs.com/TomXu/rss">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="http://www.cnblogs.com/TomXu/">汤姆大叔的博客</a>
+            <!-- 子标题 -->
+            <small>
+                </small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            
+
+<div class="post" id="post">
+    <a name="top"></a>
+    <h2><a id="cb_post_title_url" href="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园.html">深入理解JavaScript系列（11）：执行上下文（Execution Contexts）</a></h2>
+    <small>2012-01-13 09:00 by 汤姆大叔, <span id="post_view_count">15541</span> 阅读, <span id="post_comment_count">19</span> 评论, <a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#" onclick="AddToWz(2308101);return false;">收藏</a>,  <a href="http://i.cnblogs.com/EditPosts.aspx?postid=2308101" rel="nofollow">编辑</a></small>
+    <div class="entry">
+        <div id="cnblogs_post_body"><h1>简介</h1>
+<p>从本章开始，我将陆续（翻译、转载、整理）http://dmitrysoshnikov.com/网站关于ECMAScript标标准理解的好文。</p>
+<p>本章我们要讲解的是ECMAScript标准里的执行上下文和相关可执行代码的各种类型。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #000000;">原始作者：Dmitry A. Soshnikov</span><br>原始发布: 2009-06-26<br>俄文原文：http:<span style="color: #008000;">//</span><span style="color: #008000;">dmitrysoshnikov.com/ecmascript/ru-chapter-1-execution-contexts/</span><span style="color: #008000;"><br></span><br>英文翻译：Dmitry A. Soshnikov.<br>发布时间：2010-03-11<br>英文翻译：http:<span style="color: #008000;">//</span><span style="color: #008000;">dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/</span><span style="color: #008000;"><br></span><br>本文参考了博客园<a href="http://www.cnblogs.com/justinw/archive/2010/04/16/1713086.html" target="_blank">justinw的中文翻译</a>，做了一些错误修正，感谢译者。</pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h1>定义</h1>
+<p>每次当控制器转到ECMAScript可执行代码的时候，即会进入到一个执行上下文。执行上下文(简称-EC)是ECMA-262标准里的一个抽象概念，用于同可执行代码(executable code)概念进行区分。</p>
+<p>标准规范没有从技术实现的角度定义EC的准确类型和结构，这应该是具体实现ECMAScript引擎时要考虑的问题。</p>
+<p>活动的执行上下文组在逻辑上组成一个堆栈。堆栈底部永远都是全局上下文(global context)，而顶部就是当前(活动的)执行上下文。堆栈在EC类型进入和退出上下文的时候被修改（推入或弹出）。</p>
+<h1>可执行代码类型</h1>
+<p>可执行代码的类型这个概念与执行上下文的抽象概念是有关系的。在某些时刻，可执行代码与执行上下文完全有可能是等价的。</p>
+<p>例如，我们可以定义执行上下文堆栈是一个数组：</p>
+<div class="cnblogs_code">
+<pre>ECStack = [];</pre>
+</div>
+<p>每次进入function (即使function被递归调用或作为构造函数) 的时候或者内置的eval函数工作的时候，这个堆栈都会被压入。</p>
+<h2><strong>全局代码</strong></h2>
+<p>这种类型的代码是在"程序"级处理的：例如加载外部的js文件或者本地&lt;script&gt;&lt;/script&gt;标签内的代码。全局代码不包括任何function体内的代码。</p>
+<p>在初始化（程序启动）阶段，ECStack是这样的：</p>
+<div class="cnblogs_code">
+<pre>ECStack = [<br>  globalContext<br>];</pre>
+</div>
+<h2><strong>函数代码</strong></h2>
+<p>当进入funtion函数代码(所有类型的funtions)的时候，ECStack被压入新元素。需要注意的是，具体的函数代码不包括内部函数(inner functions)代码。如下所示，我们使函数自己调自己的方式递归一次：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>(<span style="color: #0000ff;">function</span>  foo(bar) {<br>  <span style="color: #0000ff;">if</span> (bar) {<br>    <span style="color: #0000ff;">return</span>;<br>  }<br>  foo(<span style="color: #0000ff;">true</span>);<br>})();</pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>那么，ECStack以如下方式被改变：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> 第一次foo的激活调用</span><span style="color: #008000;"><br></span>ECStack = [<br>  &lt;foo&gt; functionContext<br>  globalContext<br>];<br> <br><span style="color: #008000;">//</span><span style="color: #008000;"> foo的递归激活调用</span><span style="color: #008000;"><br></span>ECStack = [<br>  &lt;foo&gt; functionContext – recursively<br>  &lt;foo&gt; functionContext<br>  globalContext<br>];</pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>每次return的时候，都会退出当前执行上下文的，相应地ECStack就会弹出，栈指针会自动移动位置，这是一个典型的堆栈实现方式。一个抛出的异常如果没被截获的话也有可能从一个或多个执行上下文退出。相关代码执行完以后，ECStack只会包含全局上下文(global context)，一直到整个应用程序结束。</p>
+<h2><strong>Eval 代码</strong></h2>
+<p>eval 代码有点儿意思。它有一个概念： 调用上下文(calling context),例如，eval函数调用的时候产生的上下文。eval(变量或函数声明)活动会影响调用上下文(calling context)。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>eval('var x = 10');<br> <br>(<span style="color: #0000ff;">function</span> foo() {<br>  eval('var y = 20');<br>})();<br> <br>alert(x); <span style="color: #008000;">//</span><span style="color: #008000;"> 10</span><span style="color: #008000;"><br></span>alert(y); <span style="color: #008000;">//</span><span style="color: #008000;"> "y" 提示没有声明</span></pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>ECStack的变化过程：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>ECStack = [<br>  globalContext<br>];<br> <br><span style="color: #008000;">//</span><span style="color: #008000;"> eval('var x = 10');</span><span style="color: #008000;"><br></span>ECStack.push(<br>  evalContext,<br>  callingContext: globalContext<br>);<br> <br><span style="color: #008000;">//</span><span style="color: #008000;"> eval exited context</span><span style="color: #008000;"><br></span>ECStack.pop();<br> <br><span style="color: #008000;">//</span><span style="color: #008000;"> foo funciton call</span><span style="color: #008000;"><br></span>ECStack.push(&lt;foo&gt; functionContext);<br> <br><span style="color: #008000;">//</span><span style="color: #008000;"> eval('var y = 20');</span><span style="color: #008000;"><br></span>ECStack.push(<br>  evalContext,<br>  callingContext: &lt;foo&gt; functionContext<br>);<br> <br><span style="color: #008000;">//</span><span style="color: #008000;"> return from eval</span><span style="color: #008000;"><br></span>ECStack.pop();<br> <br><span style="color: #008000;">//</span><span style="color: #008000;"> return from foo</span><span style="color: #008000;"><br></span>ECStack.pop();</pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>也就是一个非常普通的逻辑调用堆栈。</p>
+<p>在版本号1.7以上的SpiderMonkey(内置于Firefox,Thunderbird)的实现中，可以把调用上下文作为第二个参数传递给eval。那么，如果这个上下文存在，就有可能影响“私有”(有人喜欢这样叫它)变量。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">function</span> foo() {<br>  <span style="color: #0000ff;">var</span> x = 1;<br>  <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">function</span> () { alert(x); };<br>};<br> <br><span style="color: #0000ff;">var</span> bar = foo();<br> <br>bar(); <span style="color: #008000;">//</span><span style="color: #008000;"> 1</span><span style="color: #008000;"><br></span> <br>eval('x = 2', bar); <span style="color: #008000;">//</span><span style="color: #008000;"> 传入上下文，影响了内部的var x 变量</span><span style="color: #008000;"><br></span> <br>bar(); <span style="color: #008000;">//</span><span style="color: #008000;"> 2</span></pre>
+<div class="cnblogs_code_toolbar" style="display: none;"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h1>结论</h1>
+<p>这篇文章是后面分析其他跟执行上下文相关的主题(例如变量对象，作用域链，等等)的最起码的理论基础，这些主题将在后续章节中讲到。</p>
+<h1>其他参考</h1>
+<p>这篇文章的内容在ECMA-262-3 标准规范中对应的章节— <a href="http://bclary.com/2004/11/07/#a-10" target="_blank">10. Execution Contexts</a>.</p>
+<h1>同步与推荐</h1>
+<p>本文已同步至目录索引：<span style="font-size: 14pt;"><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html" target="_blank">深入理解JavaScript系列</a></span></p>
+<p>深入理解JavaScript系列文章，包括了原创，翻译，转载等各类型的文章，如果对你有用，请推荐支持一把，给大叔写作的动力。</p></div><div id="MySignature"></div>
+        <div class="clear"></div>
+        <div id="blog_post_info_block">
+        <div id="blog_post_info"><div id="green_channel">
+绿色通道：
+<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(2308101,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+<a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a>
+<a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://space.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" target="_blank">与我联系</a>
+<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/icon_weibo_24.png" alt=""></a>
+</div>
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/TomXu/" target="_blank"><img src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/u349491.jpg" class="author_avatar" alt=""></a>
+<div id="author_profile_detail" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/TomXu/">汤姆大叔</a><br>
+<a href="http://home.cnblogs.com/u/TomXu/followees">关注 - 19</a><br>
+<a href="http://home.cnblogs.com/u/TomXu/followers">粉丝 - 6342</a>
+</div>
+</div>
+<div class="clear"></div>
+<div id="author_profile_honor">荣誉：<a href="http://www.cnblogs.com/expert/" target="_blank">推荐博客</a></div>
+<div id="author_profile_follow">
+    <a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a>
+</div>
+</div>
+<div id="div_digg">										
+    <div class="diggit" onclick="votePost(2308101,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">34</span>
+    </div>
+	<div class="buryit" onclick="votePost(2308101,&#39;Bury&#39;)"> 
+		<span class="burynum" id="bury_count">1</span>
+	</div>
+	<div class="clear"></div>	
+	<div class="diggword" id="digg_tips">
+    (请您对文章做出评价)
+    </div>	
+</div>
+</div>
+        <div class="clear"></div>
+        <div id="post_next_prev"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/12/2308594.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/TomXu/archive/2012/01/12/2308594.html" title="发布于2012-01-12 09:01">深入理解JavaScript系列（10）：JavaScript核心（晋级高手必读篇）</a><br><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2321456.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2321456.html" title="发布于2012-01-13 15:28">大叔手记（18）：利用Elmah和Google体验一把入侵的快感</a><br></div>
+    </div>
+</div>
+    <ul class="postmetadata">
+        <li class="icon_cat" id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/TomXu/category/338104.html">[06]JS/jQuery</a>, <a href="http://www.cnblogs.com/TomXu/category/337109.html">[07]Web开发</a></li>
+        <li class="icon_bullet" id="EntryTag">标签: <a href="http://www.cnblogs.com/TomXu/tag/JavaScript/">JavaScript</a>, <a href="http://www.cnblogs.com/TomXu/tag/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">执行上下文</a>, <a href="http://www.cnblogs.com/TomXu/tag/ECMA-262-3/">ECMA-262-3</a>, <a href="http://www.cnblogs.com/TomXu/tag/ECMAScript/">ECMAScript</a>, <a href="http://www.cnblogs.com/TomXu/tag/execution%20context/">execution context</a></li>
+    </ul>
+</div>
+<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=101461,cb_entryId=2308101,cb_blogApp=currentBlogApp,cb_blogUserGuid='65b02d3c-5b0b-e111-b7b9-842b2b196315',cb_entryCreatedDate='2012/1/13 9:00:00';loadViewCount(cb_entryId);</script>
+<script type="text/javascript">
+    var m = window.__blog.postRendered;
+    if (m) { m(__$("post")); }
+</script>
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) { m(); }
+</script>
+<a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<a class="addcomment" href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#comment_tip">Add your comment</a>
+<h3 id="comments"></h3>
+<div class="feedbackNoItems"></div>
+
+
+<ol class="commentlist" id="commentList">	
+
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293064" class="layer">#1楼</a><a name="2293064" id="comment_anchor_2293064"></a></cite> <a id="a_comment_author_2293064" href="http://www.cnblogs.com/leebie/" target="_blank">Jolie-猪莉</a> <a href="http://msg.cnblogs.com/msg/send/Jolie-%e7%8c%aa%e8%8e%89" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-01-13 09:33</span></small>
+			</h5>
+			<div id="comment_body_2293064" class="blog_comment_body">支持</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2293064,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2293064,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2293064_avatar" style="display:none;">http://pic.cnitblog.com/face/u353460.jpg?id=22172050</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293083" class="layer">#2楼</a><a name="2293083" id="comment_anchor_2293083"></a></cite> <a id="a_comment_author_2293083" href="http://www.cnblogs.com/Rooty/" target="_blank">Rooty</a> <a href="http://msg.cnblogs.com/msg/send/Rooty" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-01-13 09:47</span></small>
+			</h5>
+			<div id="comment_body_2293083" class="blog_comment_body">mark！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2293083,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2293083,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2293083_avatar" style="display:none;">http://pic.cnitblog.com/face/u323520.jpg?id=15215727</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293236" class="layer">#3楼</a><a name="2293236" id="comment_anchor_2293236"></a></cite> <a id="a_comment_author_2293236" href="http://www.cnblogs.com/blueker-li/" target="_blank">blueker_li</a> <a href="http://msg.cnblogs.com/msg/send/blueker_li" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-01-13 12:04</span></small>
+			</h5>
+			<div id="comment_body_2293236" class="blog_comment_body">你好，我有一个问题请教一下：<br>在页面当中由于几个人写一个界面，引用了多个jquery类库，最后在页面的引用顺序是这样的：<br>1 引用类库 1.5版本<br>2 一个jquery的上传插件<br>3 引用类库1.6版本<br> 这样 在实际运行的时候 会提示 “上传插件的方法未定义”，当把最后一个去掉或者放在 插件代码的前面都能正常运行，这是为什么？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2293236,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2293236,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293251" class="layer">#4楼</a><a name="2293251" id="comment_anchor_2293251"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2293251" href="http://www.cnblogs.com/TomXu/" target="_blank">汤姆大叔</a> <a href="http://msg.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-01-13 12:25</span></small>
+			</h5>
+			<div id="comment_body_2293251" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293236" title="查看引用原文">引用</a></legend>blueker_li：<br>你好，我有一个问题请教一下：<br>在页面当中由于几个人写一个界面，引用了多个jquery类库，最后在页面的引用顺序是这样的：<br>1 引用类库 1.5版本<br>2 一个jquery的上传插件<br>3 引用类库1.6版本<br> 这样 在实际运行的时候 会提示 “上传插件的方法未定义”，当把最后一个去掉或者放在 插件代码的前面都能正常运行，这是为什么？</fieldset><br>应该是jquery对象重新定义了，例如<br>1. 定义了Jquery对象<br>2. 然后通过jquery.fn扩展了上传插件（例如jquery.upload<br>3.重新定义了Jquery对象覆盖了前面的jquery对象，相应的jquery.upload也就没有了<br><br>你把1.6放在前面的话，也是覆盖了1.5的jquery对象，这时候上传插件是基于1.6的fn扩展上去的，所以使用起来也没问题。<br><br>关于对象共享，可以参考：<a href="http://www.cnblogs.com/TomXu/archive/2011/12/30/2288372.html" target="_blank">深入理解JavaScript系列（3）：全面解析Module模式</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2293251,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2293251,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2293251_avatar" style="display:none;">http://pic.cnitblog.com/face/u349491.jpg?id=02230504</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293298" class="layer">#5楼</a><a name="2293298" id="comment_anchor_2293298"></a></cite> <a id="a_comment_author_2293298" href="http://www.cnblogs.com/justinw/" target="_blank">Justin</a> <a href="http://msg.cnblogs.com/msg/send/Justin" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-01-13 13:42</span></small>
+			</h5>
+			<div id="comment_body_2293298" class="blog_comment_body">大叔，“做了一些错误修正”的地方可否标示出来,我也可以将原文修正一下</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2293298,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2293298,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2293298_avatar" style="display:none;">http://pic.cnitblog.com/face/u7781.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293381" class="layer">#6楼</a><a name="2293381" id="comment_anchor_2293381"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2293381" href="http://www.cnblogs.com/TomXu/" target="_blank">汤姆大叔</a> <a href="http://msg.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-01-13 15:24</span></small>
+			</h5>
+			<div id="comment_body_2293381" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293298" title="查看引用原文">引用</a></legend>Justin：大叔，“做了一些错误修正”的地方可否标示出来,我也可以将原文修正一下</fieldset><br>都是一些小细节和语法修正，其中有一个感觉理解差异比较大，你的那个留言里也提到了，就是关于“每次退出”还是“每次返回存在的”这个差别，我的理解和留言里是一样的，就是每次退出函数的时候，上下文会消失，因为作者用的是exits（退出）而不是exist（存在）。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2293381,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2293381,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2293381_avatar" style="display:none;">http://pic.cnitblog.com/face/u349491.jpg?id=02230504</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293780" class="layer">#7楼</a><a name="2293780" id="comment_anchor_2293780"></a></cite> <a id="a_comment_author_2293780" href="http://www.cnblogs.com/blueker-li/" target="_blank">blueker_li</a> <a href="http://msg.cnblogs.com/msg/send/blueker_li" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-01-14 08:45</span></small>
+			</h5>
+			<div id="comment_body_2293780" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2293251" title="查看引用原文">引用</a></legend>汤姆大叔：<br><fieldset class="comment_quote"><legend>引用</legend>blueker_li：<br>你好，我有一个问题请教一下：<br>在页面当中由于几个人写一个界面，引用了多个jquery类库，最后在页面的引用顺序是这样的：<br>1 引用类库 1.5版本<br>2 一个jquery的上传插件<br>3 引用类库1.6版本<br> 这样 在实际运行的时候 会提示 “上传插件的方法未定义”，当把最后一个去掉或者放在 插件代码的前面都能正常运行，这是为什么？</fieldset><br>应该是jquery对象重新定义了，例如<br>1. 定义了Jquery对象<br>2. 然后通过jquery.fn扩展了上传插件（例如jquery.upload<br>3.重新定义了Jquery对象覆盖了前面的jquer...</fieldset><br><br>灰常感谢，明白了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2293780,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2293780,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2314432" class="layer">#8楼</a><a name="2314432" id="comment_anchor_2314432"></a></cite> <a id="a_comment_author_2314432" href="http://home.cnblogs.com/u/378004/" target="_blank">mage234</a> <a href="http://msg.cnblogs.com/msg/send/mage234" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-22 14:11</span></small>
+			</h5>
+			<div id="comment_body_2314432" class="blog_comment_body">大叔辛苦，你的整理总结对我很有用，多谢了。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2314432,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2314432,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2324206" class="layer">#9楼</a><a name="2324206" id="comment_anchor_2324206"></a></cite> <a id="a_comment_author_2324206" href="http://www.cnblogs.com/royliugc/" target="_blank">RoyLiu</a> <a href="http://msg.cnblogs.com/msg/send/RoyLiu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-03-06 16:40</span></small>
+			</h5>
+			<div id="comment_body_2324206" class="blog_comment_body">eval('x = 2', bar)<br>eval可以有第二个参数么？<br>我在chrome里执行这段代码bar()始终是1啊。。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2324206,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2324206,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2328799" class="layer">#10楼</a><a name="2328799" id="comment_anchor_2328799"></a></cite> <a id="a_comment_author_2328799" href="http://home.cnblogs.com/u/295018/" target="_blank">黄贵涛</a> <a href="http://msg.cnblogs.com/msg/send/%e9%bb%84%e8%b4%b5%e6%b6%9b" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-03-12 17:25</span></small>
+			</h5>
+			<div id="comment_body_2328799" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2324206" title="查看引用原文">引用</a></legend>Roy&amp;#39;Note：<br>eval('x = 2', bar)<br>eval可以有第二个参数么？<br>我在chrome里执行这段代码bar()始终是1啊。。</fieldset><br>我的也是。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2328799,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2328799,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2328947" class="layer">#11楼</a><a name="2328947" id="comment_anchor_2328947"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2328947" href="http://www.cnblogs.com/TomXu/" target="_blank">汤姆大叔</a> <a href="http://msg.cnblogs.com/msg/send/%e6%b1%a4%e5%a7%86%e5%a4%a7%e5%8f%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-03-12 20:19</span></small>
+			</h5>
+			<div id="comment_body_2328947" class="blog_comment_body"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2328799" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2328799);">@</a>黄贵涛<br>@Roy&amp;#39;Note<br>这段代码只能在SpiderMonkey1.7以上的解释器执行，firefox用的是这个解释器。<br>而chrome用的是V8解释器，目前还不支持。所以不推荐使用这种方式的代码。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2328947,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2328947,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2328947_avatar" style="display:none;">http://pic.cnitblog.com/face/u349491.jpg?id=02230504</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2332530" class="layer">#12楼</a><a name="2332530" id="comment_anchor_2332530"></a></cite> <a id="a_comment_author_2332530" href="http://www.cnblogs.com/XuebinDing/" target="_blank">XuebinDing</a> <a href="http://msg.cnblogs.com/msg/send/XuebinDing" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-03-16 17:02</span></small>
+			</h5>
+			<div id="comment_body_2332530" class="blog_comment_body">大叔 越来越不好懂了，难过啊。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2332530,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2332530,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2332530_avatar" style="display:none;">http://pic.cnitblog.com/face/u159999.jpg?id=01201549</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2390387" class="layer">#13楼</a><a name="2390387" id="comment_anchor_2390387"></a></cite> <a id="a_comment_author_2390387" href="http://www.cnblogs.com/royliugc/" target="_blank">RoyLiu</a> <a href="http://msg.cnblogs.com/msg/send/RoyLiu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-05-31 16:28</span></small>
+			</h5>
+			<div id="comment_body_2390387" class="blog_comment_body">学习了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2390387,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2390387,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2448421" class="layer">#14楼</a><a name="2448421" id="comment_anchor_2448421"></a></cite> <a id="a_comment_author_2448421" href="http://home.cnblogs.com/u/261424/" target="_blank">qian119110</a> <a href="http://msg.cnblogs.com/msg/send/qian119110" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-08-14 17:19</span></small>
+			</h5>
+			<div id="comment_body_2448421" class="blog_comment_body">eval 不在函数内部<br>调用上下文后，会把变量放到全局上下文中<br>eval 在函数内部<br>调用上下文后，会把变量放到局部上下文中，<br>而这个局部上下文会随着函数退出而销毁。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2448421,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2448421,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2462148" class="layer">#15楼</a><a name="2462148" id="comment_anchor_2462148"></a></cite> <a id="a_comment_author_2462148" href="http://home.cnblogs.com/u/414335/" target="_blank">oujj</a> <a href="http://msg.cnblogs.com/msg/send/oujj" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-09-03 09:26</span></small>
+			</h5>
+			<div id="comment_body_2462148" class="blog_comment_body">大叔，看不懂怎么办？<br>要有些什么基本啊，或者要先看完哪些书啊？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2462148,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2462148,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2769848" class="layer">#16楼</a><a name="2769848" id="comment_anchor_2769848"></a></cite> <a id="a_comment_author_2769848" href="http://www.cnblogs.com/hongdada/" target="_blank">hongdada</a> <a href="http://msg.cnblogs.com/msg/send/hongdada" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-09-06 13:23</span></small>
+			</h5>
+			<div id="comment_body_2769848" class="blog_comment_body">eval('x = 2', bar);<br>好像不对吧<br>eval('x=2;y=3;',foo());<br>返回的是3<br>其实后面的foo()就没有用上</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2769848,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2769848,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2769848_avatar" style="display:none;">http://pic.cnitblog.com/face/u443934.jpg?id=03150820</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2865213" class="layer">#17楼</a><a name="2865213" id="comment_anchor_2865213"></a></cite> <a id="a_comment_author_2865213" href="http://www.cnblogs.com/5zhidao/" target="_blank">繁华中的孤儿</a> <a href="http://msg.cnblogs.com/msg/send/%e7%b9%81%e5%8d%8e%e4%b8%ad%e7%9a%84%e5%ad%a4%e5%84%bf" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-01-21 10:03</span></small>
+			</h5>
+			<div id="comment_body_2865213" class="blog_comment_body">大叔我有段代码不知何解：<br><div class="cnblogs_Highlighter sh-gutter"><div><div id="highlighter_286550" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">s=4;</code></div><div class="line number2 index1 alt1"><code class="javascript keyword">var</code> <code class="javascript plain">kk=</code><code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">this</code><code class="javascript plain">.s=3;</code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">return</code> <code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">alert(</code><code class="javascript keyword">this</code><code class="javascript plain">.s);</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">}</code></div><div class="line number7 index6 alt2"><code class="javascript plain">};</code></div><div class="line number8 index7 alt1"><code class="javascript keyword">var</code> <code class="javascript plain">o=</code><code class="javascript keyword">new</code> <code class="javascript plain">kk();</code></div><div class="line number9 index8 alt2"><code class="javascript plain">alert(o.s);</code><code class="javascript comments">//undefine</code></div></div></td></tr></tbody></table></div></div></div><br>我看了原因好像是new kk()返回的不是对象而是我指定的匿名函数，那我通过new的对象哪里去了呢</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2865213,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2865213,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#3003493" class="layer">#18楼</a><a name="3003493" id="comment_anchor_3003493"></a></cite> <a id="a_comment_author_3003493" href="http://www.cnblogs.com/zhengyingyan/" target="_blank">Ann Tseng</a> <a href="http://msg.cnblogs.com/msg/send/Ann+Tseng" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-08-08 15:02</span></small>
+			</h5>
+			<div id="comment_body_3003493" class="blog_comment_body"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2865213" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2865213);">@</a>lyg5之道<br>kk 的返回值是一个匿名函数<br>【var o=new kk();】执行这行代码后，返回值当然也是匿名函数。让返回值不是一个函数估计能达到你要的效果，但是我下面的这种方式应该是在new的时候已经执行一遍了，所以会打印出两个值。。。<br><br><br><div class="cnblogs_Highlighter sh-gutter"><div><div id="highlighter_258075" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">s = 4;</code></div><div class="line number2 index1 alt1"><code class="javascript keyword">var</code> <code class="javascript plain">kk = </code><code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number3 index2 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">this</code><code class="javascript plain">.s = 3;</code></div><div class="line number4 index3 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript keyword">return</code> <code class="javascript plain">(</code><code class="javascript keyword">function</code><code class="javascript plain">(){</code></div><div class="line number5 index4 alt2"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">console.log(</code><code class="javascript keyword">this</code><code class="javascript plain">.s);</code></div><div class="line number6 index5 alt1"><code class="javascript spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="javascript plain">})();</code></div><div class="line number7 index6 alt2"><code class="javascript plain">};</code></div><div class="line number8 index7 alt1"><code class="javascript keyword">var</code> <code class="javascript plain">o = </code><code class="javascript keyword">new</code> <code class="javascript plain">kk();</code></div><div class="line number9 index8 alt2"><code class="javascript plain">console.log(o.s);</code></div><div class="line number10 index9 alt1"><code class="javascript comments">//4</code></div><div class="line number11 index10 alt2"><code class="javascript comments">//3 </code></div></div></td></tr></tbody></table></div></div></div></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3003493,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3003493,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3003493_avatar" style="display:none;">http://pic.cnitblog.com/face/617515/20140602161515.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#3086493" class="layer">#19楼</a><a name="3086493" id="comment_anchor_3086493"></a><span id="comment-maxId" style="display:none;">3086493</span><span id="comment-maxDate" style="display:none;">2014/12/15 16:49:30</span></cite> <a id="a_comment_author_3086493" href="http://www.cnblogs.com/jser/" target="_blank">fire8119</a> <a href="http://msg.cnblogs.com/msg/send/fire8119" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-12-15 16:49</span></small>
+			</h5>
+			<div id="comment_body_3086493" class="blog_comment_body"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2865213" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2865213);">@</a>繁华中的孤儿<br>New 函数的时候，会先创建一个空对象{},然后把@繁华中的孤儿<br><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#2865213" title="查看引用原文">引用</a></legend>大叔我有段代码不知何解：<br><br>我看了原因好像是new kk()返回的不是对象而是我指定的匿名函数，那我通过new的对象哪里去了呢</fieldset><br><br><br>    function MyFunc() {};         //定义一个空函数<br>    var anObj = new MyFunc();  //使用new操作符，借助MyFun函数，就创建了一个对象<br><br>其实，可以把上面的代码改写成这种等价形式：<br>    function MyFunc(){};<br>    var anObj = {};     //创建一个对象<br>    MyFunc.call(anObj); //将anObj对象作为this指针调用MyFunc函数<br><br>用 var anObject = new aFunction() 形式创建对象的过程实际上可以分为三步：第一步是建立一个新对象；第二步将该对象内置的原型对象设置为构造函数prototype引用的那个原型对象；第 三步就是将该对象作为this参数调用构造函数，完成成员设置等初始化工作。对象建立之后，对象上的任何访问和操作都只与对象自身及其原型链上的那串对象 有关，与构造函数再扯不上关系了。换句话说，构造函数只是在创建对象时起到介绍原型对象和初始化对象两个作用。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3086493,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3086493,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+</ol>
+
+<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" id="lnk_RefreshComments" onclick="return RefreshCommentList();">刷新评论</a><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="site_nav_under"><a href="http://www.imooc.com/view/227?from=cnblogs" target="_blank"><b>【免费课程】CSS3绚丽照片墙</b></a><br><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://www.rongcloud.cn/promotion" target="_blank">融云，免费为你的App加入IM功能——让你的App“聊”起来！！</a><br><a href="http://bce.baidu.com/apply/index.html?hmsr=cnblog&hmmd=&hmpl=&hmkw=&hmci=" target="_blank">【活动】百度开放云限量500台，抓紧时间申请啦！</a></div>
+<div id="opt_under_post"></div>
+<script type="text/javascript">
+    var enableGoogleAd = canShowAdsense(); var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];
+    fixPostBodyFormat();
+</script>
+<div id="ad_under_post_holder">
+<script type="text/javascript">
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+    })();
+</script>
+<script type="text/javascript">
+    try {
+        if (enableGoogleAd) {
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C1_sitehome', [300, 250], 'div-gpt-ad-1346480159711-0').addService(googletag.pubads());
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1410860226396-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        };
+    } catch (e) { }
+</script>
+<div id="google_ad_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1346480159711-0" style="width:300px; height:250px;">
+    <script type="text/javascript">
+        try {
+            if (enableGoogleAd) {
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1346480159711-0'); });            
+            } else {
+                $('#div-gpt-ad-1346480159711-0').hide();
+            }
+    } catch (e) { }
+    </script>
+    <div id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__container__" style="border: 0pt none; display: inline-block; width: 300px; height: 250px;"><iframe frameborder="0" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/container(1).html" id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" name="1-0-1;36039;&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body leftMargin=&quot;0&quot; topMargin=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot;&gt;&lt;script&gt;(function(){var g=this,l=function(a,b){var c=a.split(&quot;.&quot;),d=g;c[0]in d||!d.execScript||d.execScript(&quot;var &quot;+c[0]);for(var e;c.length&amp;&amp;(e=c.shift());)c.length||void 0===b?d=d[e]?d[e]:d[e]={}:d[e]=b},m=function(a,b,c){return a.call.apply(a.bind,arguments)},n=function(a,b,c){if(!a)throw Error();if(2&lt;arguments.length){var d=Array.prototype.slice.call(arguments,2);return function(){var c=Array.prototype.slice.call(arguments);Array.prototype.unshift.apply(c,d);return a.apply(b,c)}}return function(){return a.apply(b,arguments)}},p=function(a,b,c){p=Function.prototype.bind&amp;&amp;-1!=Function.prototype.bind.toString().indexOf(&quot;native code&quot;)?m:n;return p.apply(null,arguments)},q=Date.now||function(){return+new Date};var r=document,s=window;var t=function(a,b){for(var c in a)Object.prototype.hasOwnProperty.call(a,c)&amp;&amp;b.call(null,a[c],c,a)},w=function(a,b){a.google_image_requests||(a.google_image_requests=[]);var c=a.document.createElement(&quot;img&quot;);c.src=b;a.google_image_requests.push(c)};var x=function(a){return{visible:1,hidden:2,prerender:3,preview:4}[a.webkitVisibilityState||a.mozVisibilityState||a.visibilityState||&quot;&quot;]||0},y=function(a){var b;a.mozVisibilityState?b=&quot;mozvisibilitychange&quot;:a.webkitVisibilityState?b=&quot;webkitvisibilitychange&quot;:a.visibilityState&amp;&amp;(b=&quot;visibilitychange&quot;);return b};var C=function(){this.g=r;this.k=s;this.j=!1;this.i=null;this.h=[];this.o={};if(z)this.i=q();else if(3==x(this.g)){this.i=q();var a=p(this.q,this);A&amp;&amp;(a=A(&quot;di::vch&quot;,a));this.p=a;var b=this.g,c=y(this.g);b.addEventListener?b.addEventListener(c,a,!1):b.attachEvent&amp;&amp;b.attachEvent(&quot;on&quot;+c,a)}else B(this)},A;C.m=function(){return C.n?C.n:C.n=new C};var D=/^([^:]+:\/\/[^/]+)/m,G=/^\d*,(.+)$/m,z=!1,B=function(a){if(!a.j){a.j=!0;for(var b=0;b&lt;a.h.length;++b)a.l.apply(a,a.h[b]);a.h=[]}};C.prototype.s=function(a,b){var c=b.target.u();(c=G.exec(c))&amp;&amp;(this.o[a]=c[1])};C.prototype.l=function(a,b){this.k.rvdt=this.i?q()-this.i:0;var c;if(c=this.t)t:{try{var d=D.exec(this.k.location.href),e=D.exec(a);if(d&amp;&amp;e&amp;&amp;d[1]==e[1]&amp;&amp;b){var f=p(this.s,this,b);this.t(a,f);c=!0;break t}}catch(u){}c=!1}c||w(this.k,a)};C.prototype.q=function(){if(3!=x(this.g)){B(this);var a=this.g,b=y(this.g),c=this.p;a.removeEventListener?a.removeEventListener(b,c,!1):a.detachEvent&amp;&amp;a.detachEvent(&quot;on&quot;+b,c)}};var H=/^true$/.test(&quot;&quot;)?!0:!1;var I={},J=function(a){var b=a.toString();a.name&amp;&amp;-1==b.indexOf(a.name)&amp;&amp;(b+=&quot;: &quot;+a.name);a.message&amp;&amp;-1==b.indexOf(a.message)&amp;&amp;(b+=&quot;: &quot;+a.message);if(a.stack){a=a.stack;var c=b;try{-1==a.indexOf(c)&amp;&amp;(a=c+&quot;\n&quot;+a);for(var d;a!=d;)d=a,a=a.replace(/((https?:\/..*\/)[^\/:]*:\d+(?:.|\n)*)\2/,&quot;$1&quot;);b=a.replace(/\n */g,&quot;\n&quot;)}catch(e){b=c}}return b},M=function(a,b,c,d){var e=K,f,u=!0;try{f=b()}catch(h){try{var N=J(h);b=&quot;&quot;;h.fileName&amp;&amp;(b=h.fileName);var E=-1;h.lineNumber&amp;&amp;(E=h.lineNumber);var v;t:{try{v=c?c():&quot;&quot;;break t}catch(S){}v=&quot;&quot;}u=e(a,N,b,E,v)}catch(k){try{var O=J(k);a=&quot;&quot;;k.fileName&amp;&amp;(a=k.fileName);c=-1;k.lineNumber&amp;&amp;(c=k.lineNumber);K(&quot;pAR&quot;,O,a,c,void 0,void 0)}catch(F){L({context:&quot;mRE&quot;,msg:F.toString()+&quot;\n&quot;+(F.stack||&quot;&quot;)},void 0)}}if(!u)throw h;}finally{if(d)try{d()}catch(T){}}return f},K=function(a,b,c,d,e,f){a={context:a,msg:b.substring(0,512),eid:e&amp;&amp;e.substring(0,40),file:c,line:d.toString(),url:r.URL.substring(0,512),ref:r.referrer.substring(0,512)};P(a);L(a,f);return!0},L=function(a,b){try{if(Math.random()&lt;(b||.01)){var c=&quot;/pagead/gen_204?id=jserror&quot;+Q(a),d=&quot;http&quot;+(&quot;https:&quot;==s.location.protocol?&quot;s&quot;:&quot;&quot;)+&quot;://pagead2.googlesyndication.com&quot;+c,d=d.substring(0,2E3);w(s,d)}}catch(e){}},P=function(a){var b=a||{};t(I,function(a,d){b[d]=s[a]})},R=function(a,b,c,d,e){return function(){var f=arguments;return M(a,function(){return b.apply(c,f)},d,e)}},Q=function(a){var b=&quot;&quot;;t(a,function(a,d){if(0===a||a)b+=&quot;&amp;&quot;+d+&quot;=&quot;+(&quot;function&quot;==typeof encodeURIComponent?encodeURIComponent(a):escape(a))});return b};A=function(a,b,c,d){return R(a,b,void 0,c,d)};z=H;l(&quot;vu&quot;,R(&quot;vu&quot;,function(a,b){var c=a.replace(&quot;&amp;amp;&quot;,&quot;&amp;&quot;),d=/(google|doubleclick).*\/pagead\/adview/.test(c),e=C.m();if(d){d=&quot;&amp;vis=&quot;+x(e.g);b&amp;&amp;(d+=&quot;&amp;ve=1&quot;);var f=c.indexOf(&quot;&amp;adurl&quot;),c=-1==f?c+d:c.substring(0,f)+d+c.substring(f)}e.j?e.l(c,b):e.h.push([c,b])}));l(&quot;vv&quot;,R(&quot;vv&quot;,function(){z&amp;&amp;B(C.m())}));})();&lt;/script&gt;&lt;script&gt;vu(&quot;http://pubads.g.doubleclick.net/pagead/adview?ai\x3dCuJc19b3dVLzNJ4j2-QOe4YG4A5aXsscGtrq3trwBv-EeEAEgt7aWAmDJBqABqq3d4QPIAQngAgCoAwGqBNABT9Bu4bLEhA1EYuG4Lu-AJzwnZur7rmozsVfthXdq35B37o30qEKlKWmAPQ4vdEkAHpBk2pP4jsGkIG4jxuOlFK_m4FqJ55bc4c5be91_nIuTGKa5Wzhb-ROfgBLVqPaHknoGGnE1ba_-jh131JrID0PZq5uZAKmYz7hRRvrVjdtVRxa1u_IOzs45i2JYJdMOCDSwz9UBtgY3NBoOmMl1dgLbEo5qWZREDl1Od6kz5wLmba0L0PjbGmEw4HRvUSGE_PFa1uIqMRtjK0k2NdPtAeAEAYgGAaAGEYAHvtKiHtgHAA\x26sigh\x3dZTPgIwm4yg0\x26adurl\x3dhttp://googleads4.g.doubleclick.net/pcs/view?xai\x3dAKAOjsuy_jCniuEpEglBIWjrfMx5WsrR205kF8FojG66CvBIRuMlEGYU7UekQReHRIJpQ7YJjTa08XjvanZWc9qt9d45TAYuASMSEp4FRFxmDkv-cmGTmY1lii8xKBNLd-QdO_AbcSgyE_0\x26sig\x3dCg0ArKJSzPOp36RIBSEHEAE\x26adurl\x3d&quot;)&lt;/script&gt;&lt;div class=&quot;GoogleActiveViewClass&quot; id=&quot;DfaVisibilityIdentifier_2250320730&quot;&gt;&lt;script type=&quot;text/javascript&quot;&gt;
+(function() {
+  var DEBUG = &#39;&#39;.toLowerCase() == &#39;true&#39;;
+  var csiStart = (+new Date);
+  var studioObjects = window[&#39;studioV2&#39;] = window[&#39;studioV2&#39;] || {};
+  var publisherSideFilePath = unescape(&#39;&#39;);
+  if(publisherSideFilePath == &#39;&#39;) {
+    publisherSideFilePath = &#39;/doubleclick/DARTIframe.html&#39;;
+  } else if (publisherSideFilePath.charAt(publisherSideFilePath.length - 1) == &#39;/&#39;) {
+    publisherSideFilePath += &#39;DARTIframe.html&#39;;
+  }
+  var bookingTimeMetaData = {
+  };
+
+  var runtimeMetaData = {
+  };
+
+  var exitUrlPatternMacroValues = {
+  };
+  var macroParser = function (macroName, value) {
+    return (value.indexOf(macroName) &lt; 0) ? value : &#39;&#39;;
+  };
+  var adServerData = {
+    eventReportingUrl: &#39;http://ad.doubleclick.net/activity;src=4385192;met=1;v=1;pid=114274784;aid=287286854;ko=0;cid=60297734;rid=60177734;rv=1;&#39;,
+    clickUrl: &#39;http://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=CuJc19b3dVLzNJ4j2-QOe4YG4A5aXsscGtrq3trwBv-EeEAEgt7aWAmDJBqABqq3d4QPIAQngAgCoAwGqBNABT9Bu4bLEhA1EYuG4Lu-AJzwnZur7rmozsVfthXdq35B37o30qEKlKWmAPQ4vdEkAHpBk2pP4jsGkIG4jxuOlFK_m4FqJ55bc4c5be91_nIuTGKa5Wzhb-ROfgBLVqPaHknoGGnE1ba_-jh131JrID0PZq5uZAKmYz7hRRvrVjdtVRxa1u_IOzs45i2JYJdMOCDSwz9UBtgY3NBoOmMl1dgLbEo5qWZREDl1Od6kz5wLmba0L0PjbGmEw4HRvUSGE_PFa1uIqMRtjK0k2NdPtAeAEAYgGAaAGEYAHvtKiHtgHAA&amp;num=1&amp;cid=5GjR1u-uVT7ygZuQXugsK2mY&amp;sig=AOD64_1-EV3QemJm5sHxqQvoWqMOxY1RLA&amp;client=ca-pub-4210569241504288&amp;adurl=http://adclick.g.doubleclick.net/pcs/click?xai=AKAOjsuy_jCniuEpEglBIWjrfMx5WsrR205kF8FojG66CvBIRuMlEGYU7UekQReHRIJpQ7YJjTa08XjvanZWc9qt9d45TAYuASMSEp4FRFxmDkv-cmGTmY1lii8xKBNLd-QdO_AbcSgyE_0&amp;sig=Cg0ArKJSzCnhSU3FAk_NEAE&amp;adurl=&#39;,
+    clickUrlTimesToEscape: &#39;&#39;,
+    impressionUrl: &#39;http://pubads.g.doubleclick.net/pagead/adview?ai=CuJc19b3dVLzNJ4j2-QOe4YG4A5aXsscGtrq3trwBv-EeEAEgt7aWAmDJBqABqq3d4QPIAQngAgCoAwGqBNABT9Bu4bLEhA1EYuG4Lu-AJzwnZur7rmozsVfthXdq35B37o30qEKlKWmAPQ4vdEkAHpBk2pP4jsGkIG4jxuOlFK_m4FqJ55bc4c5be91_nIuTGKa5Wzhb-ROfgBLVqPaHknoGGnE1ba_-jh131JrID0PZq5uZAKmYz7hRRvrVjdtVRxa1u_IOzs45i2JYJdMOCDSwz9UBtgY3NBoOmMl1dgLbEo5qWZREDl1Od6kz5wLmba0L0PjbGmEw4HRvUSGE_PFa1uIqMRtjK0k2NdPtAeAEAYgGAaAGEYAHvtKiHtgHAA&amp;sigh=ZTPgIwm4yg0&amp;adurl=http://googleads4.g.doubleclick.net/pcs/view?xai=AKAOjsuy_jCniuEpEglBIWjrfMx5WsrR205kF8FojG66CvBIRuMlEGYU7UekQReHRIJpQ7YJjTa08XjvanZWc9qt9d45TAYuASMSEp4FRFxmDkv-cmGTmY1lii8xKBNLd-QdO_AbcSgyE_0&amp;sig=Cg0ArKJSzPOp36RIBSEHEAE&amp;adurl=&#39;,
+    geoData: &#39;ct=US&amp;st=&amp;city=0&amp;dma=0&amp;zp=&amp;bw=4&#39;,
+    siteName: &#39;N5192.134426.GOOGLEDISPLAYNETWOR&#39;,
+    siteId: &#39;996750&#39;,
+    adId: &#39;0&#39;,
+    exitSuffix: &#39;&#39;,
+    buyId: &#39;8048914&#39;,
+    creativeId: &#39;60297734&#39;,
+    placementId: &#39;114274784&#39;,
+    advertiserId: &#39;4385192&#39;,
+    keyValueOrdinal: &#39;0&#39;,
+    renderingVersion: &#39;1&#39;,
+    renderingId: &#39;60177734&#39;,
+    randomNumber: &#39;2250320730&#39;,
+    dynamicData: &#39;&#39;,
+    stringReportingUrl: &#39;http://ad.doubleclick.net/activity;src=4385192;stragg=1;v=1;pid=114274784;aid=287286854;ko=0;cid=60297734;rid=60177734;rv=1;rn=2250320730;&#39;,
+    urlToGetKeywordsFor: &#39;%LivePreviewSiteUrl&#39;,
+    bookingTimeMetaData: bookingTimeMetaData,
+    generatedAdSlot: false,
+    exitUrlPatternMacroValues: exitUrlPatternMacroValues,
+    renderingEnvironment: (&#39;&#39; == &#39;1&#39; ||
+        window[&#39;mraid&#39;]) ? &#39;IN_APP&#39; : &#39;BROWSER&#39;,
+    placementDimensions: {
+      &#39;w&#39;: &#39;300&#39;,
+      &#39;h&#39;: &#39;250&#39;
+    },
+    swiffyRuntimeUrl: &#39;https://www.gstatic.com/swiffy/v7.0.2/runtime.js&#39;,
+    tag: {
+      adContainerElementId: macroParser(&#39;ad_container_id&#39;, &#39;&#39;),
+      hideObjects: &#39;&#39;,
+      top: &#39;&#39;,
+      left: &#39;&#39;,
+      zIndex: &#39;&#39;,
+      duration: &#39;&#39;,
+      wmode: &#39;&#39;,
+      preferHtml5Artwork: &#39;&#39; == &#39;true&#39;,
+      adSenseKeywords: &#39;&#39;,
+      adSenseLatitude: &#39;&#39;,
+      adSenseLongitude: &#39;&#39;,
+      publisherSideFilePath: publisherSideFilePath,
+      runtimeMetaData: runtimeMetaData,
+      lidarEnabled: false,
+      expansionMode: &#39;&#39;,
+      renderFloatInplace: &#39;&#39;.toLowerCase() == &#39;true&#39;,
+      tryToWriteHtmlInline: &#39;&#39;.toLowerCase() == &#39;true&#39;
+    }
+  };
+
+  var staticResourceMediaServer = location.protocol == &#39;https:&#39; ?
+       &#39;https://s0.2mdn.net&#39; :
+       &#39;http://s0.2mdn.net&#39;;
+
+  var creativeMediaServer = location.protocol == &#39;https:&#39; ?
+       &#39;https://s0.2mdn.net&#39; :
+       &#39;http://s0.2mdn.net&#39;;
+
+  var backupImageUrl = &#39;/4385192/300x250_safead.gif&#39;;
+  if (!/^https?:/.test(backupImageUrl)) {
+    backupImageUrl = creativeMediaServer + backupImageUrl;
+  }
+  var backupImage = {
+    exitUrl: &#39;http://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=CuJc19b3dVLzNJ4j2-QOe4YG4A5aXsscGtrq3trwBv-EeEAEgt7aWAmDJBqABqq3d4QPIAQngAgCoAwGqBNABT9Bu4bLEhA1EYuG4Lu-AJzwnZur7rmozsVfthXdq35B37o30qEKlKWmAPQ4vdEkAHpBk2pP4jsGkIG4jxuOlFK_m4FqJ55bc4c5be91_nIuTGKa5Wzhb-ROfgBLVqPaHknoGGnE1ba_-jh131JrID0PZq5uZAKmYz7hRRvrVjdtVRxa1u_IOzs45i2JYJdMOCDSwz9UBtgY3NBoOmMl1dgLbEo5qWZREDl1Od6kz5wLmba0L0PjbGmEw4HRvUSGE_PFa1uIqMRtjK0k2NdPtAeAEAYgGAaAGEYAHvtKiHtgHAA&amp;num=1&amp;cid=5GjR1u-uVT7ygZuQXugsK2mY&amp;sig=AOD64_1-EV3QemJm5sHxqQvoWqMOxY1RLA&amp;client=ca-pub-4210569241504288&amp;adurl=http://adclick.g.doubleclick.net/pcs/click?xai=AKAOjsuy_jCniuEpEglBIWjrfMx5WsrR205kF8FojG66CvBIRuMlEGYU7UekQReHRIJpQ7YJjTa08XjvanZWc9qt9d45TAYuASMSEp4FRFxmDkv-cmGTmY1lii8xKBNLd-QdO_AbcSgyE_0&amp;sig=Cg0ArKJSzCnhSU3FAk_NEAE&amp;adurl=http://www.weebly.com/%3Fc%3Dmkt_w_nwk:DisplayUS_cat:Website_Type:Awareness_camp:Display-SYS_ag:GDN-RON_adid:Standard-Rotation_lpid:000_FunnelTest:none&#39;,
+    target: &#39;_blank&#39;,
+    imageUrl: backupImageUrl,
+    width: &#39;300&#39;,
+    height: &#39;250&#39;,
+    backupDisplayActivityUrl: &#39;&#39;,
+    thirdPartyBackupImpressionUrl: &#39;&#39;
+  };
+
+  var versionPrefix = DEBUG ? &#39;db_&#39; : &#39;&#39;;
+  var templateVersion = &#39;200_58&#39;;
+  var renderingScriptPath = &#39;/879366&#39;;
+  var rendererDisplayType = &#39;&#39;;
+  rendererDisplayType += &#39;dfa7banner_&#39;;
+  rendererDisplayType += &#39;flash_&#39;;
+  rendererDisplayType += &#39;html_&#39;;
+  var rendererFormat = &#39;inpage&#39;;
+  var rendererName = rendererDisplayType + rendererFormat;
+  var renderingLibrary = renderingScriptPath + &#39;/&#39; + rendererName + &#39;_rendering_lib_&#39; +
+      versionPrefix + templateVersion + &#39;.js&#39;;
+  // Adserver has a logic to detect media files and prepend host name.
+  if (!/^https?:/.test(renderingLibrary)) {
+    renderingLibrary = staticResourceMediaServer + renderingLibrary;
+  }
+
+  var adCreativeDefinitions = {};
+
+  var creativeId = &#39;60297734&#39;;
+  var adId = adCreativeDefinitions[adServerData.adId] ? adServerData.adId : 0;
+  // The unique creative is identified by combination of creative id and ad id.
+  // When the same creative(same creative id and same ad id) is served on the page more
+  // than once then they will share the creative definition yet there will be
+  // multiple instances of &#39;adResponses&#39;.s
+  var creativeKey = [creativeId, adId].join(&#39;_&#39;);
+  var creativeDef = adCreativeDefinitions[adServerData.adId] ?
+      adCreativeDefinitions[adServerData.adId] :
+      &#39;[%DEFAULT_PLCR_PATH%]&#39;;
+  if(!/^https?:/.test(creativeDef) &amp;&amp; creativeDef.substring(0, 2) != &#39;//&#39;) {
+    creativeDef = creativeMediaServer + creativeDef;
+  }
+    creativeDef = null;
+  studioObjects[&#39;creativeCount&#39;] = studioObjects[&#39;creativeCount&#39;] || 0;
+  var creativeDto = {
+    id: creativeId,
+    uniqueId: creativeId + &#39;_&#39; + studioObjects[&#39;creativeCount&#39;]++,
+    templateVersion: templateVersion,
+    adServerData: adServerData,
+    isPreviewEnvironment: &#39;%PreviewMode&#39; == &#39;true&#39;,
+    hasFlashAsset: true,
+    hasHtmlAsset: true,
+    requiresCss3Animations: false,
+    flashVersion: &#39;9&#39;,
+    httpsMediaServer: &#39;https://s0.2mdn.net&#39;,
+    httpMediaServer: &#39;http://s0.2mdn.net&#39;,
+    renderingScriptPath: renderingScriptPath,
+    renderingLibrary: renderingLibrary,
+    rendererName: rendererName,
+    creativeDefinitionUrl: creativeDef,
+    creativeKey: creativeKey,
+    thirdPartyImpressionUrls: [&#39;&#39;],
+    thirdPartyArtworkImpressionUrl: &#39;&#39;,
+    breakoutToTop: false,
+    dimensions: {
+      width: &#39;300px&#39;,
+      height: &#39;250px&#39;
+    },
+    backupImage: backupImage,
+    csiStart: csiStart,
+    csiAdRespTime: csiStart - (parseFloat(&#39;&#39;) || 0),
+    csiEvents: {},
+    hasModernizrFeatureChecks: true,
+    html5FeatureChecks: [
+      &#39;Modernizr.canvastext&#39;,
+      &#39;Modernizr.rgba&#39;,
+      &#39;Modernizr.canvas&#39;,
+      &#39;svgFeImage&#39;,
+      &#39;svgFilters&#39;
+    ],
+    hasSwiffyHtmlAsset: true
+  };
+
+  var inGdnIframe = window[&#39;IN_ADSENSE_IFRAME&#39;] || false;
+  var inYahooSecureIframe = window.Y &amp;&amp; Y.SandBox &amp;&amp; Y.SandBox.vendor;
+  var inWinLiveIframe = false;
+  try {
+    inWinLiveIframe = !!window.$WLXRmAd;
+  } catch(e) {}
+  var inSafeFrame = window.$sf &amp;&amp; window.$sf.ext;
+  var isMsnAjaxIframe = (typeof(inDapMgrIf) != &#39;undefined&#39; &amp;&amp; inDapMgrIf);
+  var breakoutIframe = &#39;&#39;.toLowerCase();
+  var shouldBreakout = (((false ||
+                          false) &amp;&amp;
+                         !inGdnIframe &amp;&amp;
+                         !inYahooSecureIframe &amp;&amp;
+                         !inSafeFrame &amp;&amp;
+                         !inWinLiveIframe) ||
+                        (true &amp;&amp; breakoutIframe == &#39;true&#39;)) &amp;&amp;
+                       self != top &amp;&amp;
+                       !creativeDto.isPreviewEnvironment &amp;&amp;
+                       breakoutIframe != &#39;false&#39;;
+
+  if (adServerData.tag.adContainerElementId == &#39;&#39; &amp;&amp;
+      (true || false ||
+         adServerData.tag.renderFloatInplace)) {
+    var containerId = [&#39;creative&#39;, creativeDto.uniqueId].join(&#39;_&#39;);
+    var divHtml = [&#39;&lt;div id=&quot;&#39;, containerId, &#39;&quot;&gt;&lt;/div&gt;&#39;].join(&#39;&#39;);
+    document.write(divHtml);
+    adServerData.tag.adContainerElementId = containerId;
+    adServerData.generatedAdSlot = true;
+  }
+  var creatives = studioObjects[&#39;creatives&#39;] = studioObjects[&#39;creatives&#39;] || {};
+  var creative = creatives[creativeKey] = creatives[creativeKey] || {};
+  var adResponses = creative[&#39;adResponses&#39;] = creative[&#39;adResponses&#39;] || [];
+  creative[&#39;shouldBreakout&#39;] = creative[&#39;shouldBreakout&#39;] || shouldBreakout;
+  var iframeBusterLibrary = renderingScriptPath + &#39;/iframe_buster_&#39; +
+      versionPrefix + templateVersion + &#39;.js&#39;;
+  if(!/^https?:/.test(iframeBusterLibrary)) {
+    iframeBusterLibrary = staticResourceMediaServer + iframeBusterLibrary;
+  }
+  var loadedLibraries = studioObjects[&#39;loadedLibraries&#39;] = studioObjects[&#39;loadedLibraries&#39;] || {};
+  var versionedLibrary = loadedLibraries[templateVersion] = loadedLibraries[templateVersion] || {};
+  var typedLibrary = versionedLibrary[rendererName] = versionedLibrary[rendererName] || {};
+  adResponses.push({
+    creativeDto: creativeDto
+  });
+    document.write(&#39;&lt;scr&#39; + &#39;ipt type=&quot;text/javascript&quot; src=&quot;//www.gstatic.com/external_hosted/modernizr/modernizr.js&quot;&gt;&lt;/scr&#39; + &#39;ipt&gt;&#39;);
+  if (shouldBreakout) {
+    if (versionedLibrary[&#39;breakout&#39;]) {
+      versionedLibrary[&#39;breakout&#39;]();
+    } else if (!versionedLibrary[&#39;breakoutLoading&#39;]) {
+      versionedLibrary[&#39;breakoutLoading&#39;] = true;
+      document.write(&#39;&lt;scr&#39; + &#39;ipt type=&quot;text/javascript&quot; src=&quot;&#39; + iframeBusterLibrary + &#39;&quot; async=&quot;async&quot;&gt;&lt;/scr&#39; + &#39;ipt&gt;&#39;);
+    }
+  } else if (typedLibrary[&#39;bootstrap&#39;] &amp;&amp; creative[&#39;creativeDefinition&#39;]) {
+    typedLibrary[&#39;bootstrap&#39;]();
+  } else {
+    if (!typedLibrary[&#39;loading&#39;]) {
+      typedLibrary[&#39;loading&#39;] = true;
+      creativeDto.csiEvents[&#39;gb&#39;] = (+new Date);
+      document.write(&#39;&lt;scr&#39; + &#39;ipt type=&quot;text/javascript&quot; src=&quot;&#39; + renderingLibrary + &#39;&quot;&#39; + (adServerData.tag.tryToWriteHtmlInline ? &#39;&#39; : &#39; async=&quot;async&quot;&#39;) + &#39;&gt;&lt;/scr&#39; + &#39;ipt&gt;&#39;);
+    }
+  }
+  if (isMsnAjaxIframe) {
+    window.setTimeout(&quot;document.close();&quot;, 1000);
+  }
+  (function() {
+  var creativeDefinition = {
+    customScriptUrl: &#39;&#39;,
+    isDynamic: false,
+    delayedImpression: false,
+    standardEventIds: {
+      HTML5_CREATIVE_IMPRESSION: &#39;871060&#39;
+    },
+    exitEvents: [
+      {
+        name: &#39;clickTag&#39;,
+        reportingId: &#39;&#39;,
+        url: &#39;http://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=CuJc19b3dVLzNJ4j2-QOe4YG4A5aXsscGtrq3trwBv-EeEAEgt7aWAmDJBqABqq3d4QPIAQngAgCoAwGqBNABT9Bu4bLEhA1EYuG4Lu-AJzwnZur7rmozsVfthXdq35B37o30qEKlKWmAPQ4vdEkAHpBk2pP4jsGkIG4jxuOlFK_m4FqJ55bc4c5be91_nIuTGKa5Wzhb-ROfgBLVqPaHknoGGnE1ba_-jh131JrID0PZq5uZAKmYz7hRRvrVjdtVRxa1u_IOzs45i2JYJdMOCDSwz9UBtgY3NBoOmMl1dgLbEo5qWZREDl1Od6kz5wLmba0L0PjbGmEw4HRvUSGE_PFa1uIqMRtjK0k2NdPtAeAEAYgGAaAGEYAHvtKiHtgHAA&amp;num=1&amp;cid=5GjR1u-uVT7ygZuQXugsK2mY&amp;sig=AOD64_1-EV3QemJm5sHxqQvoWqMOxY1RLA&amp;client=ca-pub-4210569241504288&amp;adurl=http://adclick.g.doubleclick.net/pcs/click?xai=AKAOjsuy_jCniuEpEglBIWjrfMx5WsrR205kF8FojG66CvBIRuMlEGYU7UekQReHRIJpQ7YJjTa08XjvanZWc9qt9d45TAYuASMSEp4FRFxmDkv-cmGTmY1lii8xKBNLd-QdO_AbcSgyE_0&amp;sig=Cg0ArKJSzCnhSU3FAk_NEAE&amp;adurl=http://www.weebly.com/%3Fc%3Dmkt_w_nwk:DisplayUS_cat:Website_Type:Awareness_camp:Display-SYS_ag:GDN-RON_adid:Standard-Rotation_lpid:000_FunnelTest:none&#39;,
+        targetWindow: &#39;_blank&#39;,
+        windowProperties: &#39;&#39;
+      }
+    ],
+    timerEvents: [
+    ],
+    counterEvents: [
+    ],
+    childFiles: [
+    ],
+    videoFiles: [
+    ],
+    videoEntries: [
+    ],
+    primaryAssets: [
+      {
+        id: &#39;0&#39;,
+        artworkType: &#39;FLASH&#39;,
+        displayType: &#39;BANNER&#39;,
+        width: &#39;300&#39;,
+        height: &#39;250&#39;,
+        servingPath: &#39;/4385192/10_2014_Weebly_300x250_v6_closeup_blk.swf&#39;,
+        zIndex: &#39;0&#39;,
+        customCss: &#39;&#39;,
+        flashArtworkTypeData: {
+          actionscriptVersion: &#39;2&#39;,
+          wmode: &#39;opaque&#39;,
+          sdkVersion: &#39;&#39;,
+          flashBackgroundColor: &#39;&#39;,
+          allowScriptAccess: &#39;never&#39;
+        },
+        htmlArtworkTypeData: null,
+        floatingDisplayTypeData: null,
+        expandingDisplayTypeData: null,
+        imageGalleryTypeData: null,
+        pageSettings:null,
+layoutsConfig: null,
+layoutsApi: null
+      },
+      {
+        id: &#39;0&#39;,
+        artworkType: &#39;HTML5&#39;,
+        displayType: &#39;BANNER&#39;,
+        width: &#39;300&#39;,
+        height: &#39;250&#39;,
+        servingPath: &#39;/4385192/1415828369573/10_2014_Weebly_300x250_v6_closeup_blk.html&#39;,
+        zIndex: &#39;0&#39;,
+        customCss: &#39;&#39;,
+        flashArtworkTypeData: null,
+        htmlArtworkTypeData: {
+          isTransparent: false,
+          sdkVersion: &#39;&#39; // Duplicating sdk version in subsequent field as version format not the same.
+        },
+        floatingDisplayTypeData: null,
+        expandingDisplayTypeData: null,
+        imageGalleryTypeData: null,
+        pageSettings:null,
+layoutsConfig: null,
+layoutsApi: null
+      }
+    ]
+  }
+  var rendererDisplayType = &#39;&#39;;
+  rendererDisplayType += &#39;dfa7banner_&#39;;
+  rendererDisplayType += &#39;flash_&#39;;
+  rendererDisplayType += &#39;html_&#39;;
+  var rendererFormat = &#39;inpage&#39;;
+  var rendererName = rendererDisplayType + rendererFormat;
+
+  var creativeId = &#39;60297734&#39;;
+  var adId = &#39;0&#39;;
+  var templateVersion = &#39;200_58&#39;;
+  var studioObjects = window[&#39;studioV2&#39;] = window[&#39;studioV2&#39;] || {};
+  var creativeObjects = studioObjects[&#39;creatives&#39;] = studioObjects[&#39;creatives&#39;] || {};
+  var creativeKey = [creativeId, adId].join(&#39;_&#39;);
+  var creative = creativeObjects[creativeKey] = creativeObjects[creativeKey] || {};
+  creative[&#39;creativeDefinition&#39;] = creativeDefinition;
+  var adResponses = creative[&#39;adResponses&#39;] || [];
+  for (var i = 0; i &lt; adResponses.length; i++) {
+    adResponses[i].creativeDto &amp;&amp; adResponses[i].creativeDto.csiEvents &amp;&amp;
+        (adResponses[i].creativeDto.csiEvents[&#39;pe&#39;] =
+            adResponses[i].creativeDto.csiEvents[&#39;pe&#39;] || (+new Date));
+  }
+  var loadedLibraries = studioObjects[&#39;loadedLibraries&#39;] = studioObjects[&#39;loadedLibraries&#39;] || {};
+  var versionedLibrary = loadedLibraries[templateVersion] = loadedLibraries[templateVersion] || {};
+  var typedLibrary = versionedLibrary[rendererName] = versionedLibrary[rendererName] || {};
+  if (typedLibrary[&#39;bootstrap&#39;]) {
+    typedLibrary.bootstrap();
+  }
+})();
+
+})();
+&lt;/script&gt;
+&lt;noscript&gt;
+  &lt;a target=&quot;_blank&quot; href=&quot;http://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=CuJc19b3dVLzNJ4j2-QOe4YG4A5aXsscGtrq3trwBv-EeEAEgt7aWAmDJBqABqq3d4QPIAQngAgCoAwGqBNABT9Bu4bLEhA1EYuG4Lu-AJzwnZur7rmozsVfthXdq35B37o30qEKlKWmAPQ4vdEkAHpBk2pP4jsGkIG4jxuOlFK_m4FqJ55bc4c5be91_nIuTGKa5Wzhb-ROfgBLVqPaHknoGGnE1ba_-jh131JrID0PZq5uZAKmYz7hRRvrVjdtVRxa1u_IOzs45i2JYJdMOCDSwz9UBtgY3NBoOmMl1dgLbEo5qWZREDl1Od6kz5wLmba0L0PjbGmEw4HRvUSGE_PFa1uIqMRtjK0k2NdPtAeAEAYgGAaAGEYAHvtKiHtgHAA&amp;num=1&amp;cid=5GjR1u-uVT7ygZuQXugsK2mY&amp;sig=AOD64_1-EV3QemJm5sHxqQvoWqMOxY1RLA&amp;client=ca-pub-4210569241504288&amp;adurl=http://adclick.g.doubleclick.net/pcs/click?xai=AKAOjsuy_jCniuEpEglBIWjrfMx5WsrR205kF8FojG66CvBIRuMlEGYU7UekQReHRIJpQ7YJjTa08XjvanZWc9qt9d45TAYuASMSEp4FRFxmDkv-cmGTmY1lii8xKBNLd-QdO_AbcSgyE_0&amp;sig=Cg0ArKJSzCnhSU3FAk_NEAE&amp;adurl=http://www.weebly.com/%3Fc%3Dmkt_w_nwk:DisplayUS_cat:Website_Type:Awareness_camp:Display-SYS_ag:GDN-RON_adid:Standard-Rotation_lpid:000_FunnelTest:none&quot;&gt;
+    &lt;img border=&quot;0&quot; alt=&quot;&quot; src=&quot;//s0.2mdn.net/4385192/300x250_safead.gif&quot;
+        width=&quot;300&quot; height=&quot;250&quot; /&gt;
+  &lt;/a&gt;
+&lt;/noscript&gt;
+&lt;/div&gt;&lt;script type=&quot;text/javascript&quot;&gt;if (!window.mraid) {(function() {var avDiv = document.getElementById(&quot;DfaVisibilityIdentifier_2250320730&quot;);if (avDiv) {avDiv[&#39;_avi_&#39;] = &#39;BCAj29b3dVLzNJ4j2-QOe4YG4AwAAAAAQATgByAEJ4AQCoAY_&#39;;avDiv[&#39;_avihost_&#39;] = &#39;pagead2.googlesyndication.com&#39;;}var glidar = document.createElement(&#39;script&#39;);glidar.type = &#39;text/javascript&#39;;glidar.async = true;glidar.src = &#39;//pagead2.googlesyndication.com/pagead/js/lidar.js&#39;;var s = document.getElementsByTagName(&#39;script&#39;)[0];s.parentNode.insertBefore(glidar, s);})();}&lt;/script&gt;&lt;script type=&quot;text/javascript&quot;&gt;(function(){var h=this,m=function(a){var b=typeof a;if(&quot;object&quot;==b)if(a){if(a instanceof Array)return&quot;array&quot;;if(a instanceof Object)return b;var c=Object.prototype.toString.call(a);if(&quot;[object Window]&quot;==c)return&quot;object&quot;;if(&quot;[object Array]&quot;==c||&quot;number&quot;==typeof a.length&amp;&amp;&quot;undefined&quot;!=typeof a.splice&amp;&amp;&quot;undefined&quot;!=typeof a.propertyIsEnumerable&amp;&amp;!a.propertyIsEnumerable(&quot;splice&quot;))return&quot;array&quot;;if(&quot;[object Function]&quot;==c||&quot;undefined&quot;!=typeof a.call&amp;&amp;&quot;undefined&quot;!=typeof a.propertyIsEnumerable&amp;&amp;!a.propertyIsEnumerable(&quot;call&quot;))return&quot;function&quot;}else return&quot;null&quot;;else if(&quot;function&quot;==b&amp;&amp;&quot;undefined&quot;==typeof a.call)return&quot;object&quot;;return b},p=function(a){return&quot;string&quot;==typeof a},aa=function(a,b){var c=Array.prototype.slice.call(arguments,1);return function(){var b=c.slice();b.push.apply(b,arguments);return a.apply(this,b)}},q=Date.now||function(){return+new Date},r=function(a,b){var c=a.split(&quot;.&quot;),d=h;c[0]in d||!d.execScript||d.execScript(&quot;var &quot;+c[0]);for(var e;c.length&amp;&amp;(e=c.shift());)c.length||void 0===b?d=d[e]?d[e]:d[e]={}:d[e]=b};var u=function(a,b,c,d,e){if(e)c=a+(&quot;&amp;&quot;+b+&quot;=&quot;+c);else{var f=&quot;&amp;&quot;+b+&quot;=&quot;,g=a.indexOf(f);0&gt;g?c=a+f+c:(g+=f.length,f=a.indexOf(&quot;&amp;&quot;,g),c=0&lt;=f?a.substring(0,g)+c+a.substring(f):a.substring(0,g)+c)}return 2E3&lt;c.length?void 0!==d?u(a,b,d,void 0,e):a:c};var ba=function(){var a=/[&amp;\?]exk=([^&amp; ]+)/.exec(v.location.href);return a&amp;&amp;2==a.length?a[1]:null};var ca=function(a){var b=a.toString();a.name&amp;&amp;-1==b.indexOf(a.name)&amp;&amp;(b+=&quot;: &quot;+a.name);a.message&amp;&amp;-1==b.indexOf(a.message)&amp;&amp;(b+=&quot;: &quot;+a.message);if(a.stack){a=a.stack;var c=b;try{-1==a.indexOf(c)&amp;&amp;(a=c+&quot;\n&quot;+a);for(var d;a!=d;)d=a,a=a.replace(/((https?:\/..*\/)[^\/:]*:\d+(?:.|\n)*)\2/,&quot;$1&quot;);b=a.replace(/\n */g,&quot;\n&quot;)}catch(e){b=c}}return b},x=function(a,b){a.google_image_requests||(a.google_image_requests=[]);var c=a.document.createElement(&quot;img&quot;);c.src=b;a.google_image_requests.push(c)};var y=document,v=window;var da=String.prototype.trim?function(a){return a.trim()}:function(a){return a.replace(/^[\s\xa0]+|[\s\xa0]+$/g,&quot;&quot;)},ea=function(a,b){return a&lt;b?-1:a&gt;b?1:0};var z=null,fa=function(a,b){for(var c in a)Object.prototype.hasOwnProperty.call(a,c)&amp;&amp;b.call(null,a[c],c,a)};function A(a){return&quot;function&quot;==typeof encodeURIComponent?encodeURIComponent(a):escape(a)}var ga=function(){if(!y.body)return!1;if(!z){var a=y.createElement(&quot;iframe&quot;);a.style.display=&quot;none&quot;;a.id=&quot;anonIframe&quot;;z=a;y.body.appendChild(a)}return!0},ha={};var ia=!0,ja={},ma=function(a,b,c,d){var e=ka,f,g=ia;try{f=b()}catch(k){try{var t=ca(k);b=&quot;&quot;;k.fileName&amp;&amp;(b=k.fileName);var w=-1;k.lineNumber&amp;&amp;(w=k.lineNumber);g=e(a,t,b,w,c)}catch(n){try{var l=ca(n);a=&quot;&quot;;n.fileName&amp;&amp;(a=n.fileName);c=-1;n.lineNumber&amp;&amp;(c=n.lineNumber);ka(&quot;pAR&quot;,l,a,c,void 0,void 0)}catch(wa){la({context:&quot;mRE&quot;,msg:wa.toString()+&quot;\n&quot;+(wa.stack||&quot;&quot;)},void 0)}}if(!g)throw k;}finally{if(d)try{d()}catch(jb){}}return f},ka=function(a,b,c,d,e,f){var g={};if(e)try{e(g)}catch(k){}g.context=a;g.msg=b.substring(0,512);c&amp;&amp;(g.file=c);0&lt;d&amp;&amp;(g.line=d.toString());g.url=y.URL.substring(0,512);g.ref=y.referrer.substring(0,512);na(g);la(g,f);return ia},la=function(a,b){try{if(Math.random()&lt;(b||.01)){var c=&quot;/pagead/gen_204?id=jserror&quot;+oa(a),d=&quot;http&quot;+(&quot;http:&quot;==v.location.protocol?&quot;&quot;:&quot;s&quot;)+&quot;://pagead2.googlesyndication.com&quot;+c,d=d.substring(0,2E3);x(v,d)}}catch(e){}},na=function(a){var b=a||{};fa(ja,function(a,d){b[d]=v[a]})},B=function(a,b,c,d,e){return function(){var f=arguments;return ma(a,function(){return b.apply(c,f)},d,e)}},pa=function(a,b){return B(a,b,void 0,void 0,void 0)},oa=function(a){var b=&quot;&quot;;fa(a,function(a,d){if(0===a||a)b+=&quot;&amp;&quot;+d+&quot;=&quot;+A(a)});return b};var C=Array.prototype,qa=C.indexOf?function(a,b,c){return C.indexOf.call(a,b,c)}:function(a,b,c){c=null==c?0:0&gt;c?Math.max(0,a.length+c):c;if(p(a))return p(b)&amp;&amp;1==b.length?a.indexOf(b,c):-1;for(;c&lt;a.length;c++)if(c in a&amp;&amp;a[c]===b)return c;return-1},ra=C.map?function(a,b,c){return C.map.call(a,b,c)}:function(a,b,c){for(var d=a.length,e=Array(d),f=p(a)?a.split(&quot;&quot;):a,g=0;g&lt;d;g++)g in f&amp;&amp;(e[g]=b.call(c,f[g],g,a));return e};var sa={c:947190538,d:947190541,e:947190542};if(y&amp;&amp;y.URL)var ta=y.URL,ia=!(ta&amp;&amp;(0&lt;ta.indexOf(&quot;?google_debug&quot;)||0&lt;ta.indexOf(&quot;&amp;google_debug&quot;)));var D=function(a,b,c,d){c=B(d||&quot;osd_or_lidar::&quot;+b,c,void 0,void 0,void 0);a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent&amp;&amp;a.attachEvent(&quot;on&quot;+b,c)},ua=function(a){var b=0,c=function(){a();b++;10&gt;b&amp;&amp;v.setTimeout(pa(&quot;osd_listener::ldcl_int&quot;,c),100)};c()};var va=function(){try{v.localStorage.setItem(&quot;__sak&quot;,&quot;1&quot;);var a=v.localStorage.__sak;v.localStorage.removeItem(&quot;__sak&quot;);return&quot;1&quot;==a}catch(b){return!1}},xa=function(a,b,c){a.google_image_requests||(a.google_image_requests=[]);var d=a.document.createElement(&quot;img&quot;);D(d,&quot;load&quot;,c,&quot;osd::ls_img::load&quot;);d.src=b;a.google_image_requests.push(d)};var ya=function(a,b){for(var c in a)b.call(void 0,a[c],c,a)},E=function(a){var b=arguments.length;if(1==b&amp;&amp;&quot;array&quot;==m(arguments[0]))return E.apply(null,arguments[0]);for(var c={},d=0;d&lt;b;d++)c[arguments[d]]=!0;return c};var F;r:{var za=h.navigator;if(za){var Aa=za.userAgent;if(Aa){F=Aa;break r}}F=&quot;&quot;};var Ba=-1!=F.indexOf(&quot;Opera&quot;)||-1!=F.indexOf(&quot;OPR&quot;),G=-1!=F.indexOf(&quot;Trident&quot;)||-1!=F.indexOf(&quot;MSIE&quot;),Ca=-1!=F.indexOf(&quot;Gecko&quot;)&amp;&amp;-1==F.toLowerCase().indexOf(&quot;webkit&quot;)&amp;&amp;!(-1!=F.indexOf(&quot;Trident&quot;)||-1!=F.indexOf(&quot;MSIE&quot;)),Da=-1!=F.toLowerCase().indexOf(&quot;webkit&quot;),Ea=function(){var a=h.document;return a?a.documentMode:void 0},Fa=function(){var a=&quot;&quot;,b;if(Ba&amp;&amp;h.opera)return a=h.opera.version,&quot;function&quot;==m(a)?a():a;Ca?b=/rv\:([^\);]+)(\)|;)/:G?b=/\b(?:MSIE|rv)[: ]([^\);]+)(\)|;)/:Da&amp;&amp;(b=/WebKit\/(\S+)/);b&amp;&amp;(a=(a=b.exec(F))?a[1]:&quot;&quot;);return G&amp;&amp;(b=Ea(),b&gt;parseFloat(a))?String(b):a}(),Ga={},Ha=function(a){if(!Ga[a]){for(var b=0,c=da(String(Fa)).split(&quot;.&quot;),d=da(String(a)).split(&quot;.&quot;),e=Math.max(c.length,d.length),f=0;0==b&amp;&amp;f&lt;e;f++){var g=c[f]||&quot;&quot;,k=d[f]||&quot;&quot;,t=RegExp(&quot;(\\d*)(\\D*)&quot;,&quot;g&quot;),w=RegExp(&quot;(\\d*)(\\D*)&quot;,&quot;g&quot;);do{var n=t.exec(g)||[&quot;&quot;,&quot;&quot;,&quot;&quot;],l=w.exec(k)||[&quot;&quot;,&quot;&quot;,&quot;&quot;];if(0==n[0].length&amp;&amp;0==l[0].length)break;b=ea(0==n[1].length?0:parseInt(n[1],10),0==l[1].length?0:parseInt(l[1],10))||ea(0==n[2].length,0==l[2].length)||ea(n[2],l[2])}while(0==b)}Ga[a]=0&lt;=b}},Ia=h.document,Ja=Ia&amp;&amp;G?Ea()||(&quot;CSS1Compat&quot;==Ia.compatMode?parseInt(Fa,10):5):void 0;var H=function(a,b){this.b=a||0;this.a=b||&quot;&quot;},Ka=function(a,b){a.b&amp;&amp;(b[4]=a.b);a.a&amp;&amp;(b[12]=a.a)};H.prototype.match=function(a){return(this.b||this.a)&amp;&amp;(a.b||a.a)?this.a||a.a?this.a==a.a:this.b||a.b?this.b==a.b:!1:!1};H.prototype.toString=function(){var a=&quot;&quot;+this.b;this.a&amp;&amp;(a+=&quot;-&quot;+this.a);return a};var La=function(){var a=I,b=[];a.b&amp;&amp;b.push(&quot;adk=&quot;+a.b);a.a&amp;&amp;b.push(&quot;exk=&quot;+a.a);return b},Ma=function(a){var b=[];ya(a,function(a,d){var e=A(d),f=a;p(f)&amp;&amp;(f=A(f));b.push(e+&quot;=&quot;+f)});return b.join(&quot;\n&quot;)},J=0,Na=0,Oa=function(a){var b=0,c=v;if(c&amp;&amp;c.Goog_AdSense_getAdAdapterInstance)return c;try{for(;c&amp;&amp;5&gt;b;){if(c.google_osd_static_frame)return c;if(c.aswift_0&amp;&amp;(!a||c.aswift_0.google_osd_static_frame))return c.aswift_0;b++;c=c!=c.parent?c.parent:null}}catch(d){}return null},Pa=function(a,b,c,d){if(10&lt;Na)v.clearInterval(J);else if(++Na,v.postMessage&amp;&amp;(b.b||b.a)){var e=Oa(!0);if(e){var f={};Ka(b,f);f[0]=&quot;goog_request_monitoring&quot;;f[6]=a;f[16]=c;d&amp;&amp;d.length&amp;&amp;(f[17]=d.join(&quot;,&quot;));try{var g=Ma(f);e.postMessage(g,&quot;*&quot;)}catch(k){}}}};E(&quot;area base br col command embed hr img input keygen link meta param source track wbr&quot;.split(&quot; &quot;));E(&quot;action&quot;,&quot;cite&quot;,&quot;data&quot;,&quot;formaction&quot;,&quot;href&quot;,&quot;manifest&quot;,&quot;poster&quot;,&quot;src&quot;);E(&quot;embed&quot;,&quot;iframe&quot;,&quot;link&quot;,&quot;object&quot;,&quot;script&quot;,&quot;style&quot;,&quot;template&quot;);var Qa;if(!(Qa=!Ca&amp;&amp;!G)){var Ra;if(Ra=G)Ra=G&amp;&amp;9&lt;=Ja;Qa=Ra}Qa||Ca&amp;&amp;Ha(&quot;1.9.1&quot;);G&amp;&amp;Ha(&quot;9&quot;);var Sa,K=0,L=&quot;&quot;,M=!1,N=!1,O=!1,Ta=!0,Ua=!1,Va=[],I=null,P=&quot;&quot;,Wa=[],Xa=[],Ya=!1,Q=&quot;&quot;,R=&quot;&quot;,Za=(new Date).getTime(),$a=[&quot;1&quot;,&quot;0&quot;,&quot;3&quot;],S=0,T=!1,U=&quot;&quot;,V=null,W=0,X=0,ab=0,bb=function(a,b,c){M&amp;&amp;(Ta||3!=(c||3))&amp;&amp;Y(a,b,!0);(O||N&amp;&amp;Ua)&amp;&amp;Y(a,b)},Y=function(a,b,c){if((b=b||P)&amp;&amp;!Ya&amp;&amp;(2==X||c)){b=cb(b,c);if(!c&amp;&amp;T){T=!1;V&amp;&amp;(a.clearInterval(V),V=null);var d=U;try{a.localStorage[d]=b+&quot;&amp;timestamp=&quot;+q()+&quot;&amp;send&quot;}catch(e){}5!=S&amp;&amp;xa(a,b,function(){a.localStorage.removeItem(d)})}else x(a,b);c?M=!1:Ya=!0}},cb=function(a,b){var c;c=b?&quot;osdim&quot;:O?&quot;osd2&quot;:&quot;osdtos&quot;;var d=[&quot;//pagead2.googlesyndication.com/activeview&quot;,&quot;?id=&quot;,c];&quot;osd2&quot;==c&amp;&amp;N&amp;&amp;Ua&amp;&amp;d.push(&quot;&amp;ts=1&quot;);L&amp;&amp;d.push(&quot;&amp;avi=&quot;,L);Sa&amp;&amp;d.push(&quot;&amp;cid=&quot;,Sa);0!=S&amp;&amp;d.push(&quot;&amp;lsid=&quot;,S);T&amp;&amp;d.push(&quot;&amp;cwls=1&quot;);d.push(&quot;&amp;ti=1&quot;);d.push(&quot;&amp;&quot;,a);d.push(&quot;&amp;uc=&quot;+ab);c=d.join(&quot;&quot;);for(d=0;d&lt;Wa.length;d++){try{var e=Wa[d]()}catch(f){}var g=&quot;max_length&quot;;2&lt;=e.length&amp;&amp;(3==e.length&amp;&amp;(g=e[2]),c=u(c,A(e[0]),A(e[1]),g))}2E3&lt;c.length&amp;&amp;(c=c.substring(0,2E3));return c},Z=function(a,b){if(Q){try{var c=u(Q,&quot;vi&quot;,a);ga()&amp;&amp;x(z.contentWindow,c)}catch(d){}0&lt;=qa($a,a)&amp;&amp;(Q=&quot;&quot;);var c=b||P,e;e=u(&quot;//pagead2.googlesyndication.com/pagead/gen_204?id=sldb&quot;,&quot;avi&quot;,L);e=u(e,&quot;vi&quot;,a);c&amp;&amp;(e+=&quot;&amp;&quot;+c);try{x(v,e)}catch(f){}}},db=function(){Z(&quot;-1&quot;)},fb=function(a){if(a&amp;&amp;a.data&amp;&amp;p(a.data)){var b;var c=a.data;if(p(c)){b={};for(var c=c.split(&quot;\n&quot;),d=0;d&lt;c.length;d++){var e=c[d].indexOf(&quot;=&quot;);if(!(0&gt;=e)){var f=Number(c[d].substr(0,e)),e=c[d].substr(e+1);switch(f){case 5:case 8:case 11:case 15:case 16:e=&quot;true&quot;==e;break;case 4:case 7:case 6:case 14:e=Number(e);break;case 3:if(&quot;function&quot;==m(decodeURIComponent))try{e=decodeURIComponent(e)}catch(g){throw Error(&quot;Error: URI malformed: &quot;+e);}break;case 17:e=ra(decodeURIComponent(e).split(&quot;,&quot;),Number)}b[f]=e}}b=b[0]?b:null}else b=null;if(b&amp;&amp;(c=new H(b[4],b[12]),I&amp;&amp;I.match(c))){for(c=0;c&lt;Xa.length;c++)Xa[c](b);c=b[0];if(&quot;goog_acknowledge_monitoring&quot;==c)v.clearInterval(J),W=2;else if(&quot;goog_get_mode&quot;==c){W=1;d={};I&amp;&amp;Ka(I,d);d[0]=&quot;goog_provide_mode&quot;;d[6]=X;try{var k=Ma(d);a.source.postMessage(k,a.origin)}catch(t){}v.clearInterval(J);W=2}else if(&quot;goog_update_data&quot;==c){if(a=v,P=b[3],++ab,T){k=U;d=cb(P);try{a.localStorage[k]=eb(d)}catch(w){}}}else&quot;goog_image_request&quot;==c&amp;&amp;(bb(v,b[3]),b[5]||b[11]||Z(&quot;0&quot;,b[3]));if(&quot;goog_update_data&quot;==c||&quot;goog_image_request&quot;==c)(1==X||2==X||M)&amp;&amp;b[5]&amp;&amp;(a=1==b[15]&amp;&amp;&quot;goog_update_data&quot;==c,Ua=!0,Z(&quot;1&quot;),R&amp;&amp;(k=R,ga()&amp;&amp;x(z.contentWindow,k),R=&quot;&quot;),M&amp;&amp;!a&amp;&amp;Y(v,void 0,!0),1==X?Ya=!0:(2==S||4==S||5==S&amp;&amp;!T)&amp;&amp;Y(v)),(1==X||2==X||M)&amp;&amp;b[11]&amp;&amp;(N=!1,Z(&quot;3&quot;),M&amp;&amp;Y(v,void 0,!0),(2==S||4==S||5==S&amp;&amp;!T)&amp;&amp;Y(v))}}},gb=function(){bb(v);Z(&quot;0&quot;);if(2&gt;W&amp;&amp;2==X){var a=v,b=&quot;//pagead2.googlesyndication.com/pagead/gen_204?id=osd2&amp;&quot;,c=[];c.push(&quot;ovr_value=&quot;+K);c.push(&quot;avi=&quot;+L);I&amp;&amp;(c=c.concat(La()));c.push(&quot;tt=&quot;+((new Date).getTime()-Za));a.document&amp;&amp;a.document.referrer&amp;&amp;c.push(&quot;ref=&quot;+A(a.document.referrer));c.push(&quot;hs=&quot;+W);b+=c.join(&quot;&amp;&quot;);try{x(a,b)}catch(d){}}},eb=function(a){var b=a.match(/^(.*&amp;timestamp=)\d+$/);return b?b[1]+q():a+&quot;&amp;timestamp=&quot;+q()},hb=function(){var a={};Ka(I,a);a[0]=&quot;goog_dom_content_loaded&quot;;var b=Ma(a);ua(function(){var a=Oa(!1),d=!a;!a&amp;&amp;v&amp;&amp;(a=v.parent);if(a&amp;&amp;a.postMessage)try{a.postMessage(b,&quot;*&quot;),d&amp;&amp;v.postMessage(b,&quot;*&quot;)}catch(e){}})},ib=function(a){if(p(a)){a=a.split(&quot;&amp;&quot;);for(var b=0;b&lt;a.length;b++)&quot;ud=1&quot;==a[b]&amp;&amp;(Ta=!1)}};r(&quot;osdlfm&quot;,B(&quot;osd_listener::init&quot;,function(a,b,c,d,e,f,g,k,t,w,n){K=a;Q=b;R=d;M=f;S=w||0;Sa=n;k&amp;&amp;ib(k);N=g&amp;&amp;f;1!=t&amp;&amp;2!=t&amp;&amp;3!=t||Va.push(sa[&quot;MRC_TEST_&quot;+t]);I=new H(e,ba());D(v,&quot;load&quot;,db,&quot;osd_listener::load&quot;);D(v,&quot;message&quot;,fb,&quot;osd_listener::message&quot;);L=c||&quot;&quot;;D(v,&quot;unload&quot;,gb,&quot;osd_listener::unload&quot;);var l=v.document;!l.readyState||&quot;complete&quot;!=l.readyState&amp;&amp;&quot;loaded&quot;!=l.readyState?(&quot;msie&quot;in ha?ha.msie:ha.msie=-1!=navigator.userAgent.toLowerCase().indexOf(&quot;msie&quot;))&amp;&amp;!window.opera?D(l,&quot;readystatechange&quot;,function(){&quot;complete&quot;!=l.readyState&amp;&amp;&quot;loaded&quot;!=l.readyState||hb()},&quot;osd_listener::rsc&quot;):D(l,&quot;DOMContentLoaded&quot;,hb,&quot;osd_listener::dcl&quot;):hb();-1==K?X=f?3:1:-2==K?X=3:0&lt;K&amp;&amp;(X=2,O=!0);N&amp;&amp;!O&amp;&amp;(X=2);2==X&amp;&amp;v.location.hostname.match(/doubleclick\.net/)&amp;&amp;(3==S||4==S||5==S)&amp;&amp;va()&amp;&amp;1E3&gt;v.localStorage.length&amp;&amp;(U=&quot;LSPNGS-&quot;+I.toString()+&quot;-&quot;+(&quot;&quot;+Math.random()).split(&quot;.&quot;)[1]+q(),T=!0,V=v.setInterval(pa(&quot;osd_listener::ls_int&quot;,function(){var a=v,b=U,c=a.localStorage[b];if(c)try{a.localStorage[b]=eb(c)}catch(d){}}),1E3));I&amp;&amp;(I.b||I.a)&amp;&amp;(W=1,J=v.setInterval(pa(&quot;osd_proto::reqm_int&quot;,aa(Pa,X,I,N,Va)),500))}));r(&quot;osdlac&quot;,B(&quot;osd_listener::lac_ex&quot;,function(a){Wa.push(a)}));r(&quot;osdlamrc&quot;,B(&quot;osd_listener::lamrc_ex&quot;,function(a){Xa.push(a)}));r(&quot;osdsir&quot;,B(&quot;osd_listener::sir_ex&quot;,bb));})();osdlfm(-1,&#39;&#39;,&#39;BX75D9b3dVLzNJ4j2-QOe4YG4AwC2ure2vAEAABABOAHIAQngAgDgBAGgBhHCEwMQgAE&#39;,&#39;&#39;,1707953772,true,false,&#39;&#39;,0,0,&#39;&#39;);&lt;/script&gt;&lt;style&gt;div,ul,li{margin:0;padding:0;}#abgc{height:15px;position:absolute;right:0px;text-rendering:geometricPrecision;top:0;width:15px;z-index:9010;}#abgb{height:100%;}#abgc img{display:block;}#abgc svg{display:block;}#abgs{display:none;height:100%;}#abgl{text-decoration:none;}&lt;/style&gt;&lt;div id=abgc&gt;&lt;div id=abgb&gt;&lt;/div&gt;&lt;div id=abgs&gt;&lt;a id=abgl href=&quot;https://www.google.com/url?ct=abg&amp;amp;q=https://www.google.com/adsense/support/bin/request.py%3Fcontact%3Dabg_afc%26url%3Dhttp://www.cnblogs.com/TomXu/archive/2012/01/13/2308101.html%26gl%3DUS%26hl%3Dzh%26client%3Dca-pub-4210569241504288%26ai0%3DCuJc19b3dVLzNJ4j2-QOe4YG4A5aXsscGtrq3trwBv-EeEAEgt7aWAmDJBqABqq3d4QPIAQngAgCoAwGqBNABT9Bu4bLEhA1EYuG4Lu-AJzwnZur7rmozsVfthXdq35B37o30qEKlKWmAPQ4vdEkAHpBk2pP4jsGkIG4jxuOlFK_m4FqJ55bc4c5be91_nIuTGKa5Wzhb-ROfgBLVqPaHknoGGnE1ba_-jh131JrID0PZq5uZAKmYz7hRRvrVjdtVRxa1u_IOzs45i2JYJdMOCDSwz9UBtgY3NBoOmMl1dgLbEo5qWZREDl1Od6kz5wLmba0L0PjbGmEw4HRvUSGE_PFa1uIqMRtjK0k2NdPtAeAEAYgGAaAGEYAHvtKiHtgHAA&amp;amp;usg=AFQjCNE1Pw5-4qvaza6H1mV_ifhMpPdVqA&quot; target=_blank&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;script&gt;var abgp={el:document.getElementById(&#39;abgc&#39;),ael:document.getElementById(&#39;abgs&#39;),iel:document.getElementById(&#39;abgb&#39;),hw:15,sw:111,hh:15,sh:15,himg:&#39;http://pagead2.googlesyndication.com&#39;+&#39;/pagead/images/abg/icon.png&#39;,simg:&#39;http://pagead2.googlesyndication.com/pagead/images/abg/zh_cn.png&#39;,alt:&#39;Google 提供的广告&#39;,t:&#39;Google&#39;,tw:38,t2:&#39;提供的广告&#39;,t2w:49,tbo:0,att:&#39;adsbygoogle&#39;,ff:&#39;&#39;,halign:&#39;right&#39;,fe:false,fnb:false,iba:false,uic:false,icd:undefined};&lt;/script&gt;&lt;script src=&quot;http://pagead2.googlesyndication.com/pagead/js/r20150210/r20110914/abg.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;{&quot;uid&quot;:1,&quot;hostPeerName&quot;:&quot;http://www.cnblogs.com&quot;,&quot;initialGeometry&quot;:&quot;{\&quot;windowCoords_t\&quot;:23,\&quot;windowCoords_r\&quot;:907,\&quot;windowCoords_b\&quot;:686,\&quot;windowCoords_l\&quot;:143,\&quot;frameCoords_t\&quot;:8469.6875,\&quot;frameCoords_r\&quot;:320,\&quot;frameCoords_b\&quot;:8719.6875,\&quot;frameCoords_l\&quot;:20,\&quot;styleZIndex\&quot;:\&quot;auto\&quot;,\&quot;allowedExpansion_t\&quot;:0,\&quot;allowedExpansion_r\&quot;:0,\&quot;allowedExpansion_b\&quot;:0,\&quot;allowedExpansion_l\&quot;:0,\&quot;xInView\&quot;:0,\&quot;yInView\&quot;:0}&quot;,&quot;permissions&quot;:&quot;{\&quot;expandByOverlay\&quot;:true,\&quot;expandByPush\&quot;:false,\&quot;readCookie\&quot;:false,\&quot;writeCookie\&quot;:false}&quot;,&quot;metadata&quot;:&quot;{\&quot;shared\&quot;:{\&quot;sf_ver\&quot;:\&quot;1-0-1\&quot;,\&quot;ck_on\&quot;:1,\&quot;flash_ver\&quot;:\&quot;15.0.0\&quot;}}&quot;,&quot;reportCreativeGeometry&quot;:false}" scrolling="no" marginwidth="0" marginheight="0" width="300" height="250" data-is-safeframe="true" style="border: 0px; vertical-align: bottom;"></iframe></div><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" width="0" height="0" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom; visibility: hidden; display: none;"></iframe></div>
+</div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/515284/" target="_blank">你该学点HTML/CSS知识的9大理由</a><br> ·  <a href="http://news.cnblogs.com/n/515283/" target="_blank">你以为新开个公司就是创业公司？</a><br> ·  <a href="http://news.cnblogs.com/n/515282/" target="_blank">滴滴若与快的合并，最受伤的是百度！</a><br> ·  <a href="http://news.cnblogs.com/n/515281/" target="_blank">天猫国际迎大型卖场入驻潮：欧美日韩都有</a><br> ·  <a href="http://news.cnblogs.com/n/515280/" target="_blank">周鸿祎不做“大神”做“自己”</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="google_ad_c2" class="c_ad_block">
+<div id="div-gpt-ad-1410860226396-0" style="width:468px; height:60px;">
+<script type="text/javascript">
+try {
+    if (enableGoogleAd) {
+        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1410860226396-0'); });
+    } else {
+        $('#div-gpt-ad-1346480159711-0').hide();
+    }
+} catch (e) { }
+</script>
+<div id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" name="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" src="javascript:"<html><body style='background:transparent'></body></html>"" style="border: 0px; vertical-align: bottom;"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/515258/" target="_blank">Bitmap的秘密</a><br> ·  <a href="http://kb.cnblogs.com/page/515151/" target="_blank">我该如何向非技术人解释SQL注入？</a><br> ·  <a href="http://kb.cnblogs.com/page/514938/" target="_blank">使用2-3法则设计分布式数据访问层</a><br> ·  <a href="http://kb.cnblogs.com/page/514866/" target="_blank">数据清洗经验</a><br> ·  <a href="http://kb.cnblogs.com/page/514725/" target="_blank">设计中的变与不变</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+$(function () {
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 200);
+});
+</script>
+</div>
+
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            
+<div id="about">
+<div>
+<h2 id="about_title">About</h2>
+<div id="about_body">
+<div id="blog-news"><p><img style="float:left;margin-right:10px" alt="" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/tom.jpg" height="150" width="150"><strong>目前工作</strong>：项目管理（PMP）<br>
+<strong>曾获认证</strong>：MCP、MCSE、MCDBA、MCTS、MCITP、MCPD、PMP、MVP<br>
+<strong>略有小成</strong>：软件架构、设计模式、OOD、OOP、DI、IOC、AOP、SOA<br>
+<strong>兴趣爱好</strong>：技术、管理、英文、吃喝玩乐乱侃空
+</p>
+<p style="clear:both"></p>
+<br>
+熟悉Waterfall、Agile(Scrum&amp;XP)，染指C#、ASP.NET、MVC、EF、NHibernate、SQL Server、Oracle、JavaScript、HTML5、CSS3、JQuery、Knockout、Silverlight、WPF、WCF、ADFS等技术<br>
+<br>
+<span style="color: red;">注：</span>本人翻译的技术文章皆不是逐句翻译，而是按照自己的理解翻译的（当然也去除了一些不影响理解但本人实在不知道如何组织的句子）。<br>
+<br>
+<p style="clear:both"></p>
+<fieldset> <legend>作品上市</legend>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/zcover.jpg" alt="" width="150">
+[1] <a href="http://item.jd.com/11644151.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://product.china-pub.com/4559565" target="_blank">China-Pub</a>
+<br>
+[3] <a href="http://www.amazon.cn/gp/product/B00SNCI018//ref=fs_rd_1" target="_blank">卓越亚马逊</a>
+<br>
+[4] <a href="http://product.dangdang.com/23648815.html" target="_blank">当当网</a>
+<br>
+[5] <a href="http://book.douban.com/subject/25980651/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=%E7%BC%96%E5%86%99%E5%8F%AF%E6%B5%8B%E8%AF%95%E7%9A%84JavaScript%E4%BB%A3%E7%A0%81" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<p style="clear:both"></p><br>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/zcover(1).jpg" alt="" width="150">
+[1] <a href="http://item.jd.com/11542504.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://product.china-pub.com/3770506" target="_blank">China-Pub</a>
+<br>
+[3] <a href="http://www.amazon.cn/gp/product/B00NIEA9DS/ref=fs_rd_1" target="_blank">卓越亚马逊</a>
+<br>
+[4] <a href="http://product.dangdang.com/23563374.html" target="_blank">当当网</a>
+<br>
+[5] <a href="http://book.douban.com/subject/25980651/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=Backbone.js%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<p style="clear:both"></p><br>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/zcover(2).jpg" alt="" width="150">
+[1] <a href="http://item.jd.com/11462962.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://product.china-pub.com/3770057" target="_blank">China-Pub</a>
+<br>
+[3] <a href="http://www.amazon.cn/Web%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E4%B8%9B%E4%B9%A6-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Bootstrap-%E5%BE%90%E6%B6%9B/dp/B00KCCM4HI/" target="_blank">卓越亚马逊</a>
+<br>
+[4] <a href="http://product.dangdang.com/23475042.html" target="_blank">当当网</a>
+<br>
+[5] <a href="http://book.douban.com/subject/25886197/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Bootstrap" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<p style="clear:both"></p><br>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/shupi.jpg" alt="" width="150">
+[1] <a href="http://item.jd.com/11416981.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://product.china-pub.com/3769483" target="_blank">China-Pub</a>
+<br>
+[3] <a href="http://www.amazon.cn/JavaScript%E5%90%AF%E7%A4%BA%E5%BD%95-%E7%BE%8E-Cody-Lindley/dp/B00IR39PNU/" target="_blank">卓越亚马逊</a>
+<br>
+[4] <a href="http://product.dangdang.com/23433090.html" target="_blank">当当网</a>
+<br>
+[5] <a href="http://book.douban.com/subject/25837367/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=JavaScript%E5%90%AF%E7%A4%BA%E5%BD%95" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<p style="clear:both"></p><br>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/o_jsdp.jpg" alt="" width="150">
+[1] <a href="http://book.jd.com/11253887.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://www.amazon.cn/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%BE%8E-Addy-Osmani/dp/B00D6MT3LG/" target="_blank">卓越亚马逊</a>
+<br>
+[3] <a href="http://product.dangdang.com/product.aspx?product_id=23266635" target="_blank">当当网</a>
+<br>
+[4] <a href="http://product.china-pub.com/3768064" target="_blank">China-Pub</a>
+<br>
+[5] <a href="http://book.douban.com/subject/24744217/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20Addy%20Osmani" target="_blank">淘宝网</a>
+<br>
+<br>
+</p>
+<div style="clear:both"></div>
+<p><img style="float:left;margin-right:10px" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/o_EloquentJavaScript.jpg" alt="" width="150">
+[1] <a href="http://book.360buy.com/11091494.html" target="_blank">京东商城</a>
+<br>
+[2] <a href="http://www.amazon.cn/JavaScript%E7%BC%96%E7%A8%8B%E7%B2%BE%E8%A7%A3-%E5%93%88%E5%BC%97%E8%B4%9D%E5%85%8B/dp/B009A7D25E/ref=sr_1_11" target="_blank">卓越亚马逊</a>
+<br>
+[3] <a href="http://union.dangdang.com/transfer/transfer.aspx?from=P-263982&backurl=http://product.dangdang.com/product.aspx?product_id=22873894" target="_blank">当当网</a>
+<br>
+[4] <a href="http://product.china-pub.com/3684096" target="_blank">China-Pub</a>
+<br>
+[5] <a href="http://book.douban.com/subject/19933548/" target="_blank">豆瓣网</a>
+<br>
+[6] <a href="http://s.taobao.com/search?q=JavaScript%E7%BC%96%E7%A8%8B%E7%B2%BE%E8%A7%A3" target="_blank">淘宝网</a>
+<br>
+<br>
+<a href="http://www.cnblogs.com/TomXu/archive/2012/10/21/JSError.html" target="_blank">本书勘误</a>
+</p>
+
+</fieldset><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/TomXu/">汤姆大叔</a><br>园龄：<a href="http://home.cnblogs.com/u/TomXu/" title="入园时间：2011-11-10">3年3个月</a><br>荣誉：<a href="http://www.cnblogs.com/expert/">推荐博客</a><br>粉丝：<a href="http://home.cnblogs.com/u/TomXu/followers/">6342</a><br>关注：<a href="http://home.cnblogs.com/u/TomXu/followees/">19</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger(&#39;65b02d3c-5b0b-e111-b7b9-842b2b196315&#39;)">+加关注</a></div></div></div>
+<script type="text/javascript">loadBlogNews();</script>
+</div>
+</div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            
+<div id="mySearchWrapper">
+    <div id="mySearch">
+        <input type="image" src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/btnsearch.gif" id="btnZzk" class="submit" onclick="zzk_go();return false;">
+        <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword"></label>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            <div id="side-recent-posts">
+        <h2>最新随笔</h2>
+        <ul class="bullet">
+                <li><a href="http://www.cnblogs.com/TomXu/p/4266774.html">新书《编写可测试的JavaScript代码 》出版，感谢支持</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756865.html">MVC之前的那点事儿系列（10）：MVC为什么不再需要注册通配符（*.*）了？</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756863.html">MVC之前的那点事儿系列（9）：MVC如何在Pipeline中接管请求的？</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756858.html">MVC之前的那点事儿系列（8）：UrlRouting的理解</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756854.html">MVC之前的那点事儿系列（7）：WebActivator的实现原理详解</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756846.html">MVC之前的那点事儿系列（6）：动态注册HttpModule</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756843.html">MVC之前的那点事儿系列（5）：Http Pipeline详细分析（下）</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756832.html">MVC之前的那点事儿系列（4）：Http Pipeline详细分析（上）</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756824.html">MVC之前的那点事儿系列（3）：HttpRuntime详解分析（下）</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/p/3756813.html">MVC之前的那点事儿系列（2）：HttpRuntime详解分析（上）</a></li>
+        </ul>
+    </div><div id="side-recent-comments">
+        <h2>最新评论</h2>
+        <ul class="voice">
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3129282">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3129282">
+                        正在看您翻译的《Javascript编程精解》，大叔太厉害了！
+                        -- 天琊蓝
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html#3128077">Re:深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html#3128077">
+                        学习了~
+                        -- 云一样飘过
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html#3125642">Re:深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html#3125642">
+                        十分感谢，正在学习~
+                        -- 灰丶一样
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/archive/2012/10/22/2733027.html#3125544">Re:《JavaScript编程精解》回馈网友，汤姆大叔送书30本</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/archive/2012/10/22/2733027.html#3125544">
+                        抢书喽，抢抢
+                        -- YaChenYa
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/archive/2012/02/24/2353434.html#3125384">Re:深入理解JavaScript系列（29）：设计模式之装饰者模式</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/archive/2012/02/24/2353434.html#3125384">
+                        这个模式挺好，今天用上了
+                        -- Jeff.Zhong
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3123195">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3123195">
+                        支持啊。。。。
+                        -- 无眠
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3122872">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3122872">
+                        大叔 又出书了 厉害
+                        -- lordma
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3122510">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3122510">
+                        mark
+                        -- 舒元华
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3122253">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3122253">
+                        大叔又出书了， 恭喜。<br>那本《Javascript启示录》很棒
+                        -- Frank.Fan
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/TomXu/p/4266774.html#3122245">Re:新书《编写可测试的JavaScript代码 》出版，感谢支持</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/TomXu/p/4266774.html#3122245">
+                        有没有试读章节哇？
+                        -- 幻天芒
+                    </a>
+                </li>
+        </ul>
+    </div></div>
+            <div id="sideRight">
+            <div id="side-archives">
+        <h2>随笔档案</h2>
+        <ul class="date">
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2015/02.html">2015年2月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2014/06.html">2014年6月(7)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2014/05.html">2014年5月(6)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2014/03.html">2014年3月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2013/06.html">2013年6月(1)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/10.html">2012年10月(2)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/07.html">2012年7月(3)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/04.html">2012年4月(12)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/03.html">2012年3月(5)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/02.html">2012年2月(18)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2012/01.html">2012年1月(14)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2011/12.html">2011年12月(45)</a></li>
+                <li><a href="http://www.cnblogs.com/TomXu/archive/2011/11.html">2011年11月(28)</a></li>
+        </ul>
+    </div>    
+    
+    
+    
+    
+
+
+        
+        
+        
+        
+        
+<div id="side-link-341714">
+            <h2>[01]汤姆大叔系列博文</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/10/2283385.html" target="_blank">[01]大叔手记全集</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/11/21/2257154.html" target="_blank">[02]Knockout应用开发指南</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/11/25/2263050.html" target="_blank">[03]微软ASP.NET站点部署指南</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/06/2277499.html" target="_blank">[04]HTML5学习笔记简明版</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2284773.html" target="_blank">[05]大叔翻译博文索引</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html" target="_blank">[06]深入理解JavaScript系列</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/p/3756794.html" target="_self">[07]MVC之前的那点事儿系列</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-345293">
+            <h2>[04]推荐博友精选好文</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/peterzb/archive/2009/06/14/1502918.html" target="_blank">[01]C# WinForm开发系列</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/lifepoem/archive/2011/12/16/2288017.html" target="_blank">[02]LINQ之路</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/xiao-f/archive/2011/12/19/lang.html" target="_blank">[03]Javascript面向对象扩展库</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-348581">
+            <h2>[05]推荐外部精选好文</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://kangax.github.com/es5-compat-table/" target="_blank">[01]ECMAScript 5浏览器兼容表</a>
+                        </li>
+                        <li>
+                            <a href="http://kb.cnblogs.com/page/127995/" target="_blank">[02]Javascript 面向对象编程</a>
+                        </li>
+            </ul>
+        </div></div>
+            <div id="sideLeft">
+            <div id="side-calendar">
+        <h2>日历</h2>
+        <div id="blog-calendar"><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="日历">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2011/12/01&#39;);return false;">&lt;</a></td><td align="center">2012年1月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2012/02/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/04.html"><u>4</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/05.html"><u>5</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/06.html"><u>6</u></a></td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/09.html"><u>9</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/10.html"><u>10</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/11.html"><u>11</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/12.html"><u>12</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/13.html"><u>13</u></a></td><td class="CalWeekendDay" align="center">14</td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/16.html"><u>16</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/17.html"><u>17</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/18.html"><u>18</u></a></td><td align="center">19</td><td align="center">20</td><td class="CalWeekendDay" align="center">21</td></tr><tr><td class="CalWeekendDay" align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td class="CalWeekendDay" align="center">28</td></tr><tr><td class="CalWeekendDay" align="center">29</td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/30.html"><u>30</u></a></td><td align="center"><a href="http://www.cnblogs.com/TomXu/archive/2012/01/31.html"><u>31</u></a></td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr>
+</tbody></table></div>
+    </div><div id="side-categories">
+        <h2>随笔分类</h2>
+        <ul class="folder">
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/335665.html">[01].Net Framework(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/338101.html">[02]C#(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/338102.html">[03]ASP.NET(6)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/335666.html">[04]ASP.NET MVC(19)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/336175.html">[05]HTML5/CSS3(18)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/338104.html">[06]JS/jQuery(66)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/337109.html">[07]Web开发(62)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/336771.html">[08]Knockout(15)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/338040.html">[09]配置管理(13)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/337899.html">[10]项目管理(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/TomXu/category/340064.html">[11]大叔手记(22)</a>
+                </li>
+        </ul>
+    </div><div id="side-top-posts-custom">
+    <h2>推荐排行榜</h2>
+    <div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html">1. 深入理解JavaScript系列(327)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html">2. 深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点(278)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/21/2292722.html">3. 大叔手记（12）：我的一次面试经历（谈大叔如何应对面试官）(239)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/02/23/2364425.html">4. 大叔手记（21）：汤姆大叔博客园开博100天总结(206)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/29/2290308.html">5. 深入理解JavaScript系列（2）：揭秘命名函数表达式(136)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/01/05/2305453.html">6. 深入理解JavaScript系列（5）：强大的原型和原型链(111)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/30/2288372.html">7. 深入理解JavaScript系列（3）：全面解析Module模式(109)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/01/12/2308594.html">8. 深入理解JavaScript系列（10）：JavaScript核心（晋级高手必读篇）(107)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/19/2291448.html">9. 大叔手记（10）：别再让面试官问你单例（暨6种实现方式让你堵住面试官的嘴）(90)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/11/22/2258849.html">10. 最锋利的Visual Studio Web开发工具扩展：Web Essentials详解(83)</a></li></ul></div>
+</div><div id="side-top-posts">
+    <h2>阅读排行榜</h2>
+    <div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html">1. 深入理解JavaScript系列(205772)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html">2. 深入理解JavaScript系列（1）：编写高质量JavaScript代码的基本要点(85633)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/11/21/2257154.html">3. Knockout应用开发指南（完整版） 目录索引(57228)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/29/2290308.html">4. 深入理解JavaScript系列（2）：揭秘命名函数表达式(45392)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/30/2288372.html">5. 深入理解JavaScript系列（3）：全面解析Module模式(34959)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/01/12/2308594.html">6. 深入理解JavaScript系列（10）：JavaScript核心（晋级高手必读篇）(34044)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/01/05/2305453.html">7. 深入理解JavaScript系列（5）：强大的原型和原型链(33290)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/31/2289423.html">8. 深入理解JavaScript系列（4）：立即调用的函数表达式(31987)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2012/10/22/2733027.html">9. 《JavaScript编程精解》回馈网友，汤姆大叔送书30本(31893)</a></li><li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/21/2292722.html">10. 大叔手记（12）：我的一次面试经历（谈大叔如何应对面试官）(31057)</a></li></ul></div>
+</div><div id="side-link-342866">
+            <h2>[02]汤姆大叔推荐单篇</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/14/2286225.html" target="_blank">[01]大型JavaScript应用架构模式</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/19/2291448.html" target="_blank">[02]别再让面试官问你单例</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/TomXu/archive/2011/12/21/2292722.html" target="_blank">[03]大叔的一次面试经历</a>
+                        </li>
+            </ul>
+        </div><div id="side-link-345292">
+            <h2>[03]推荐博友算法相关</h2>
+            <ul class="chain">
+                        <li>
+                            <a href="http://www.cnblogs.com/huangxincheng/category/340146.html" target="_blank">[01]算法系列15天速成</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/jinzhao/archive/2011/11/30/2268569.html" target="_blank">[02]算法实现大全</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/tuyile006/category/95974.html" target="_blank">[03]常用算法</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/Jax/category/57279.html" target="_blank">[04]算法大全</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/weidagang2046/archive/2009/07/31/1535902.html" target="_blank">[05]博客积分算法探讨</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/chehaoj/archive/2010/11/23/1885497.html" target="_blank">[06]常见算法推演</a>
+                        </li>
+                        <li>
+                            <a href="http://www.cnblogs.com/wangfupeng1988/archive/2011/12/26/2302216.html" target="_blank">[07]眼睛直观感受几种常用排序算法</a>
+                        </li>
+            </ul>
+        </div></div>
+            
+                <div id="sideContainer"></div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/mvc/blog/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                loadBlogDefaultCalendar();
+                                loadBlogSideBlocks();
+                                var m = window.__blog.sideContainerRendered;
+                                if (m) { m(__$("sideContainer")); }
+                                window.__blog.sidebar.__layout();
+                            }
+                        }
+                    });
+
+                </script>
+            
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            
+<p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright ©2015 汤姆大叔
+</p>
+<p>
+<a href="http://www.cnblogs.com/">博客园</a>
+</p>
+</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+<!--PageEndHtml Block Begin-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("body").prepend($("#div_digg").css({
+            "position": "fixed", "right": "0px", "bottom": "0px", "z-index": "10", "background-color": "white", "margin": "10px", "padding": "10px", "border": "1px solid #cccccc"
+        }));
+      $(".cnblogs_code_toolbar").hide();
+    });
+</script><iframe src="./深入理解JavaScript系列（11）：执行上下文（Execution Contexts） - 汤姆大叔 - 博客园_files/container.html" style="visibility: hidden; display: none;"></iframe>
+<!--PageEndHtml Block End-->
+
+
+</body></html>
